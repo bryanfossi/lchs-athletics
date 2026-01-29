@@ -1,0 +1,336 @@
+{
+  "football": {
+    "schedule": [
+      {
+        "date": "08/22/2026",
+        "opponent": "Solanco High School",
+        "location": "Away",
+        "time": "Scrimmage"
+      },
+      {
+        "date": "08/28/2026",
+        "opponent": "Camp Hill High School",
+        "location": "Away",
+        "time": "Non-League"
+      },
+      {
+        "date": "08/28/2026",
+        "opponent": "Camp Hill High School",
+        "location": "Away",
+        "time": "Non-League"
+      },
+      {
+        "date": "09/04/2026",
+        "opponent": "Newport Junior/Senior High School",
+        "location": "Home",
+        "time": "Non-League"
+      },
+      {
+        "date": "09/11/2026",
+        "opponent": "York Catholic High School",
+        "location": "Away",
+        "time": "Non-League"
+      },
+      {
+        "date": "09/25/2026",
+        "opponent": "Kutztown Area Senior High School",
+        "location": "Home",
+        "time": "League"
+      },
+      {
+        "date": "10/02/2026",
+        "opponent": "Hamburg Area High School",
+        "location": "Home",
+        "time": "League"
+      },
+      {
+        "date": "10/09/2026",
+        "opponent": "Schuylkill Valley High School",
+        "location": "Away",
+        "time": "League"
+      },
+      {
+        "date": "10/16/2026",
+        "opponent": "Homecoming (Pequea Valley Secondary School)",
+        "location": "Home",
+        "time": "League"
+      },
+      {
+        "date": "10/23/2026",
+        "opponent": "Columbia High School/Columbia Middle School",
+        "location": "Away",
+        "time": "League"
+      },
+      {
+        "date": "10/30/2026",
+        "opponent": "Senior Recognition (Berks Catholic High School)",
+        "location": "Home",
+        "time": "League"
+      }
+    ],
+    "roster": [],
+    "image": "/football-hero.jpeg"
+  },
+  "boys-soccer": {
+    "schedule": [
+      {
+        "date": "8/22/2026",
+        "opponent": "Brandywine Heights",
+        "homeAway": "Home",
+        "eventType": "Scrimmage",
+        "time": "10:00 AM"
+      },
+      {
+        "date": "9/9/2026",
+        "opponent": "Lebanon High School",
+        "homeAway": "Away",
+        "eventType": "League",
+        "time": "4:15 PM"
+      },
+      {
+        "date": "9/11/2026",
+        "opponent": "Lancaster Mennonite School",
+        "homeAway": "Home",
+        "eventType": "League",
+        "time": "4:00 PM"
+      },
+      {
+        "date": "9/15/2026",
+        "opponent": "Pequea Valley Secondary School",
+        "homeAway": "Home",
+        "eventType": "League",
+        "time": "7:00 PM"
+      },
+      {
+        "date": "9/17/2026",
+        "opponent": "Lancaster Country Day School",
+        "homeAway": "Home",
+        "eventType": "League",
+        "time": "7:30 PM"
+      },
+      {
+        "date": "9/19/2026",
+        "opponent": "Octorara Area Senior High School",
+        "homeAway": "Away",
+        "eventType": "Non-League",
+        "time": "10:00 AM"
+      },
+      {
+        "date": "9/21/2026",
+        "opponent": "Annville-Cleona High School",
+        "homeAway": "Home",
+        "eventType": "League",
+        "time": "7:00 PM"
+      },
+      {
+        "date": "9/23/2026",
+        "opponent": "Lebanon High School",
+        "homeAway": "Home",
+        "eventType": "League",
+        "time": "4:00 PM"
+      },
+      {
+        "date": "9/25/2026",
+        "opponent": "Oley Valley Senior High School",
+        "homeAway": "Away",
+        "eventType": "Non-League",
+        "time": "12:01 AM"
+      },
+      {
+        "date": "9/29/2026",
+        "opponent": "Lancaster Mennonite School",
+        "homeAway": "Away",
+        "eventType": "League",
+        "time": "7:00 PM"
+      },
+      {
+        "date": "10/5/2026",
+        "opponent": "Lancaster Country Day School",
+        "homeAway": "Away",
+        "eventType": "League",
+        "time": "4:00 PM"
+      },
+      {
+        "date": "10/10/2026",
+        "opponent": "York Catholic High School",
+        "homeAway": "Home",
+        "eventType": "Non-League",
+        "time": "3:00 PM"
+      }
+    ],
+    "roster": [
+      {
+        "number": "0",
+        "name": "Logan Kratz",
+        "position": "G",
+        "year": "Senior"
+      },
+      {
+        "number": "1",
+        "name": "Mark Weinheimer",
+        "position": "G",
+        "year": "Sophomore"
+      },
+      {
+        "number": "2",
+        "name": "Danny Wann",
+        "position": "D",
+        "year": "Senior"
+      },
+      {
+        "number": "3",
+        "name": "Joey Berdecia",
+        "position": "F",
+        "year": "Sophomore"
+      },
+      {
+        "number": "5",
+        "name": "Aidan Nguyen",
+        "position": "D",
+        "year": "Junior"
+      },
+      {
+        "number": "6",
+        "name": "Steven Pelaez - Chacon",
+        "position": "M",
+        "year": "Junior"
+      },
+      {
+        "number": "7",
+        "name": "Pablo Navas",
+        "position": "F",
+        "year": "Junior"
+      },
+      {
+        "number": "8",
+        "name": "Luca Dorazio",
+        "position": "M",
+        "year": "Senior"
+      },
+      {
+        "number": "9",
+        "name": "Will Anater",
+        "position": "D",
+        "year": "Senior"
+      },
+      {
+        "number": "10",
+        "name": "Carson Spangler",
+        "position": "F",
+        "year": "Senior"
+      },
+      {
+        "number": "11",
+        "name": "Ryan Stritch",
+        "position": "F",
+        "year": "Freshman"
+      },
+      {
+        "number": "13",
+        "name": "Stephen Scott",
+        "position": "F",
+        "year": "Senior"
+      },
+      {
+        "number": "14",
+        "name": "James O'Malley",
+        "position": "F",
+        "year": "Freshman"
+      },
+      {
+        "number": "15",
+        "name": "Ethan Dissinger",
+        "position": "M",
+        "year": "Sophomore"
+      },
+      {
+        "number": "16",
+        "name": "Will O'Malley",
+        "position": "M",
+        "year": "Senior"
+      },
+      {
+        "number": "17",
+        "name": "Owen Humphrey",
+        "position": "D",
+        "year": "Sophomore"
+      },
+      {
+        "number": "18",
+        "name": "Domingo Metzler",
+        "position": "M",
+        "year": "Sophomore"
+      },
+      {
+        "number": "19",
+        "name": "Jake Sowers",
+        "position": "M",
+        "year": "Sophomore"
+      },
+      {
+        "number": "20",
+        "name": "Shandon Barnock",
+        "position": "M",
+        "year": "Freshman"
+      },
+      {
+        "number": "22",
+        "name": "Caden Hurter",
+        "position": "M",
+        "year": "Sophomore"
+      },
+      {
+        "number": "23",
+        "name": "Bastian Lucquin",
+        "position": "M",
+        "year": "Senior"
+      },
+      {
+        "number": "24",
+        "name": "Joe Snyder",
+        "position": "D",
+        "year": "Junior"
+      },
+      {
+        "number": "25",
+        "name": "Evan Becker",
+        "position": "M",
+        "year": "Senior"
+      },
+      {
+        "number": "26",
+        "name": "Simon Pelaez - Chacon",
+        "position": "F",
+        "year": "Freshman"
+      },
+      {
+        "number": "27",
+        "name": "Mateo Curry",
+        "position": "F",
+        "year": "Freshman"
+      },
+      {
+        "number": "28",
+        "name": "Sawyer Owens",
+        "position": "M",
+        "year": "Sophomore"
+      },
+      {
+        "number": "29",
+        "name": "Danny Dougherty",
+        "position": "M",
+        "year": "Sophomore"
+      },
+      {
+        "number": "40",
+        "name": "Joe Havrilla",
+        "position": "D",
+        "year": "Freshman"
+      }
+    ],
+    "image": "/boys-soccer-hero.jpeg",
+    "coach": "Bryan Fossi",
+    "coachEmail": "bfossi@lchsyes.org",
+    "description": "Lancaster Catholic Boys Soccer is a proud, tradition-rich program dedicated to developing student-athletes who compete with skill, discipline, and heart. Rooted in the values of Lancaster Catholic High School, the program emphasizes teamwork, leadership, and respect—on and off the field. Through a commitment to hard work, sportsmanship, and continuous improvement, Lancaster Catholic Soccer prepares players not only for competitive success, but also for growth as confident leaders and teammates who represent their school and community with pride."
+  }
+}
