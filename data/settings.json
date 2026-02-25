@@ -1,0 +1,38 @@
+{
+  "schoolName": "Lancaster Catholic High School",
+  "mascot": "Crusaders",
+  "primaryColor": "#582c88",
+  "secondaryColor": "#ffea00",
+  "logo": "/school-logo.png",
+  "twitterUrl": "https://x.com/CyaaAthletics",
+  "instagramUrl": "https://www.instagram.com/lcatholic/?hl=en",
+  "icalUrl": "user@test123.com",
+  "timezone": "America/New_York",
+  "theme": "school",
+  "stats": [
+    {
+      "id": "1",
+      "title": "Section Championships",
+      "value": "12",
+      "icon": "trophy"
+    },
+    {
+      "id": "2",
+      "title": "District Championships",
+      "value": "8",
+      "icon": "trophy"
+    },
+    {
+      "id": "3",
+      "title": "State Championships",
+      "value": "3",
+      "icon": "trophy"
+    },
+    {
+      "id": "4",
+      "title": "All-State Players",
+      "value": "47",
+      "icon": "star"
+    }
+  ]
+}

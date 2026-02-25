@@ -24,3 +24,72 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Continuous marquee for the upcoming-games ticker */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* Stat card entrance — triggered by adding the animation via inline style */
+@keyframes statCardIn {
+  from { opacity: 0; transform: translateY(28px) scale(0.94); }
+  to   { opacity: 1; transform: translateY(0)   scale(1);    }
+}
+
+/* ─── Theme System ───────────────────────────────────────────────────────────
+   .themed-page is added to the root <div> of each public page.
+   [data-theme] is set on <html> by ThemeApplicator.
+   These rules override Tailwind utility classes for background, text, and borders.
+ ─────────────────────────────────────────────────────────────────────────── */
+
+/* ── Dark Theme ── */
+[data-theme="dark"] .themed-page {
+  background-color: #0F172A;
+  color: #E2E8F0;
+}
+[data-theme="dark"] .themed-page .bg-gray-50  { background-color: #0F172A !important; }
+[data-theme="dark"] .themed-page .bg-white    { background-color: #1E293B !important; }
+[data-theme="dark"] .themed-page .bg-gray-100 { background-color: #162032 !important; }
+
+[data-theme="dark"] .themed-page .text-gray-800 { color: #F1F5F9 !important; }
+[data-theme="dark"] .themed-page .text-gray-700 { color: #E2E8F0 !important; }
+[data-theme="dark"] .themed-page .text-gray-600 { color: #CBD5E1 !important; }
+[data-theme="dark"] .themed-page .text-gray-500 { color: #94A3B8 !important; }
+
+[data-theme="dark"] .themed-page .border-gray-300 { border-color: #334155 !important; }
+[data-theme="dark"] .themed-page .border-gray-200 { border-color: #1E293B  !important; }
+[data-theme="dark"] .themed-page .border-gray-100 { border-color: #1E293B  !important; }
+[data-theme="dark"] .themed-page .border-b        { border-color: #334155  !important; }
+
+[data-theme="dark"] .themed-page .shadow-lg { box-shadow: 0 10px 25px -5px rgba(0,0,0,0.6), 0 4px 6px -4px rgba(0,0,0,0.5) !important; }
+[data-theme="dark"] .themed-page .shadow    { box-shadow: 0 2px 8px rgba(0,0,0,0.5) !important; }
+[data-theme="dark"] .themed-page .shadow-sm { box-shadow: 0 1px 4px rgba(0,0,0,0.4) !important; }
+
+/* Hover row in roster table */
+[data-theme="dark"] .themed-page .hover\:bg-gray-50:hover { background-color: #1E293B !important; }
+
+/* ── School Theme ── */
+/* Uses CSS color-mix() against the school's --school-primary variable        */
+[data-theme="school"] .themed-page {
+  background-color: color-mix(in srgb, var(--school-primary, #581C87) 8%, white);
+}
+[data-theme="school"] .themed-page .bg-gray-50  {
+  background-color: color-mix(in srgb, var(--school-primary, #581C87) 8%, white) !important;
+}
+[data-theme="school"] .themed-page .bg-white {
+  background-color: #ffffff !important;
+}
+[data-theme="school"] .themed-page .bg-gray-100 {
+  background-color: color-mix(in srgb, var(--school-primary, #581C87) 14%, white) !important;
+}
+
+/* Cards get a subtle left-border accent and a school-tinted shadow */
+[data-theme="school"] .themed-page .shadow-lg {
+  box-shadow: 0 10px 25px -5px color-mix(in srgb, var(--school-primary, #581C87) 20%, transparent),
+              0 4px 6px -4px  color-mix(in srgb, var(--school-primary, #581C87) 15%, transparent) !important;
+}
+/* Headings pick up the school primary colour */
+[data-theme="school"] .themed-page .text-gray-800 {
+  color: color-mix(in srgb, var(--school-primary, #581C87) 90%, black) !important;
+}

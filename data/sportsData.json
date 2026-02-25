@@ -2,74 +2,443 @@
   "football": {
     "schedule": [
       {
-        "date": "08/22/2026",
-        "opponent": "Solanco High School",
-        "location": "Away",
-        "time": "Scrimmage"
-      },
-      {
-        "date": "08/28/2026",
+        "date": "Aug 22, 2025",
         "opponent": "Camp Hill High School",
-        "location": "Away",
-        "time": "Non-League"
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "7:00 PM"
       },
       {
-        "date": "08/28/2026",
+        "date": "Aug 25, 2025",
+        "opponent": "JP McCaskey High School Campus",
+        "homeAway": "Home",
+        "eventType": "JV",
+        "time": "4:00 PM"
+      },
+      {
+        "date": "Aug 28, 2025",
+        "opponent": "Lebanon High School",
+        "homeAway": "Away",
+        "eventType": "",
+        "time": "4:00 PM"
+      },
+      {
+        "date": "Aug 29, 2025",
+        "opponent": "Delone Catholic High School",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "7:00 PM"
+      },
+      {
+        "date": "Sep 3, 2025",
+        "opponent": "Donegal High School",
+        "homeAway": "Home",
+        "eventType": "",
+        "time": "4:00 PM"
+      },
+      {
+        "date": "Sep 5, 2025",
+        "opponent": "Eastern Lebanon County",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "7:00 PM"
+      },
+      {
+        "date": "Sep 8, 2025",
+        "opponent": "York County School Of Technology",
+        "homeAway": "Away",
+        "eventType": "JV",
+        "time": "4:00 PM"
+      },
+      {
+        "date": "Sep 11, 2025",
         "opponent": "Camp Hill High School",
-        "location": "Away",
-        "time": "Non-League"
+        "homeAway": "Home",
+        "eventType": "",
+        "time": "4:00 PM"
       },
       {
-        "date": "09/04/2026",
-        "opponent": "Newport Junior/Senior High School",
-        "location": "Home",
-        "time": "Non-League"
-      },
-      {
-        "date": "09/11/2026",
-        "opponent": "York Catholic High School",
-        "location": "Away",
-        "time": "Non-League"
-      },
-      {
-        "date": "09/25/2026",
-        "opponent": "Kutztown Area Senior High School",
-        "location": "Home",
-        "time": "League"
-      },
-      {
-        "date": "10/02/2026",
-        "opponent": "Hamburg Area High School",
-        "location": "Home",
-        "time": "League"
-      },
-      {
-        "date": "10/09/2026",
-        "opponent": "Schuylkill Valley High School",
-        "location": "Away",
-        "time": "League"
-      },
-      {
-        "date": "10/16/2026",
-        "opponent": "Homecoming (Pequea Valley Secondary School)",
-        "location": "Home",
-        "time": "League"
-      },
-      {
-        "date": "10/23/2026",
+        "date": "Sep 12, 2025",
         "opponent": "Columbia High School/Columbia Middle School",
-        "location": "Away",
-        "time": "League"
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "7:00 PM"
       },
       {
-        "date": "10/30/2026",
-        "opponent": "Senior Recognition (Berks Catholic High School)",
-        "location": "Home",
-        "time": "League"
+        "date": "Sep 15, 2025",
+        "opponent": "Columbia High School/Columbia Middle School",
+        "homeAway": "Home",
+        "eventType": "JV",
+        "time": "4:00 PM"
+      },
+      {
+        "date": "Sep 18, 2025",
+        "opponent": "Eastern Lebanon County",
+        "homeAway": "Home",
+        "eventType": "",
+        "time": "7:00 PM"
+      },
+      {
+        "date": "Sep 19, 2025",
+        "opponent": "Berks Catholic High School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "7:00 PM"
+      },
+      {
+        "date": "Sep 22, 2025",
+        "opponent": "Berks Catholic High School",
+        "homeAway": "Away",
+        "eventType": "JV",
+        "time": "5:00 PM"
+      },
+      {
+        "date": "Sep 24, 2025",
+        "opponent": "Warwick Senior High School",
+        "homeAway": "Away",
+        "eventType": "",
+        "time": "6:00 PM"
+      },
+      {
+        "date": "Sep 26, 2025",
+        "opponent": "Hamburg Area High School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "7:00 PM"
+      },
+      {
+        "date": "Sep 29, 2025",
+        "opponent": "JP McCaskey High School Campus",
+        "homeAway": "Home",
+        "eventType": "JV",
+        "time": "4:00 PM"
+      },
+      {
+        "date": "Oct 3, 2025",
+        "opponent": "Annville-Cleona High School",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "7:00 PM"
+      },
+      {
+        "date": "Oct 6, 2025",
+        "opponent": "Annville-Cleona High School",
+        "homeAway": "Home",
+        "eventType": "JV",
+        "time": "4:00 PM"
+      },
+      {
+        "date": "Oct 8, 2025",
+        "opponent": "Annville-Cleona High School",
+        "homeAway": "Home",
+        "eventType": "",
+        "time": "4:00 PM"
+      },
+      {
+        "date": "Oct 10, 2025",
+        "opponent": "Kutztown Area Senior High School",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "7:00 PM"
+      },
+      {
+        "date": "Oct 13, 2025",
+        "opponent": "Kutztown Area Senior High School",
+        "homeAway": "Home",
+        "eventType": "JV",
+        "time": "4:00 PM"
+      },
+      {
+        "date": "Oct 16, 2025",
+        "opponent": "Columbia High School/Columbia Middle School",
+        "homeAway": "Away",
+        "eventType": "",
+        "time": "4:00 PM"
+      },
+      {
+        "date": "Oct 17, 2025",
+        "opponent": "Pequea Valley Secondary School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "7:00 PM"
+      },
+      {
+        "date": "Oct 23, 2025",
+        "opponent": "Wilson West Middle School",
+        "homeAway": "Away",
+        "eventType": "",
+        "time": "4:00 PM"
+      },
+      {
+        "date": "Oct 24, 2025",
+        "opponent": "Schuylkill Valley High School",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "7:00 PM"
+      },
+      {
+        "date": "Oct 27, 2025",
+        "opponent": "Schuylkill Valley High School",
+        "homeAway": "Home",
+        "eventType": "JV",
+        "time": "4:00 PM"
+      },
+      {
+        "date": "Oct 31, 2025",
+        "opponent": "Halifax Area High School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "7:00 PM"
+      },
+      {
+        "date": "Oct 31, 2025",
+        "opponent": "Halifax Area High School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "7:00 PM"
+      },
+      {
+        "date": "Aug 22, 2026",
+        "opponent": "Solanco High School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "10:00 AM"
+      },
+      {
+        "date": "Aug 28, 2026",
+        "opponent": "Camp Hill High School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "12:01 AM"
+      },
+      {
+        "date": "Aug 28, 2026",
+        "opponent": "Camp Hill High School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "7:00 PM"
+      },
+      {
+        "date": "Aug 29, 2026",
+        "opponent": "JP McCaskey High School Campus",
+        "homeAway": "Home",
+        "eventType": "",
+        "time": "10:00 AM"
+      },
+      {
+        "date": "Aug 31, 2026",
+        "opponent": "Camp Hill High School",
+        "homeAway": "Away",
+        "eventType": "JV",
+        "time": "4:00 PM"
+      },
+      {
+        "date": "Sep 4, 2026",
+        "opponent": "Newport Junior/Senior High School",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "7:00 PM"
+      },
+      {
+        "date": "Sep 8, 2026",
+        "opponent": "Newport Junior/Senior High School",
+        "homeAway": "Home",
+        "eventType": "JV",
+        "time": "6:30 PM"
+      },
+      {
+        "date": "Sep 11, 2026",
+        "opponent": "York Catholic High School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "7:00 PM"
+      },
+      {
+        "date": "Sep 14, 2026",
+        "opponent": "York Catholic High School",
+        "homeAway": "Away",
+        "eventType": "JV",
+        "time": "6:00 PM"
+      },
+      {
+        "date": "Sep 17, 2026",
+        "opponent": "Garden Spot High School",
+        "homeAway": "Home",
+        "eventType": "",
+        "time": "4:00 PM"
+      },
+      {
+        "date": "Sep 18, 2026",
+        "opponent": "Annville-Cleona High School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "7:00 PM"
+      },
+      {
+        "date": "Sep 24, 2026",
+        "opponent": "Fleetwood Area High School",
+        "homeAway": "Away",
+        "eventType": "",
+        "time": "4:00 PM"
+      },
+      {
+        "date": "Sep 25, 2026",
+        "opponent": "Kutztown Area Senior High School",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "7:00 PM"
+      },
+      {
+        "date": "Sep 28, 2026",
+        "opponent": "Kutztown Area Senior High School",
+        "homeAway": "Home",
+        "eventType": "JV",
+        "time": "4:00 PM"
+      },
+      {
+        "date": "Oct 1, 2026",
+        "opponent": "Cocalico Senior High School",
+        "homeAway": "Home",
+        "eventType": "",
+        "time": "4:00 PM"
+      },
+      {
+        "date": "Oct 2, 2026",
+        "opponent": "Hamburg Area High School",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "7:00 PM"
+      },
+      {
+        "date": "Oct 5, 2026",
+        "opponent": "Hamburg Area High School",
+        "homeAway": "Home",
+        "eventType": "JV",
+        "time": "4:00 PM"
+      },
+      {
+        "date": "Oct 9, 2026",
+        "opponent": "Schuylkill Valley High School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "7:00 PM"
+      },
+      {
+        "date": "Oct 12, 2026",
+        "opponent": "Schuylkill Valley High School",
+        "homeAway": "Away",
+        "eventType": "JV",
+        "time": "4:00 PM"
+      },
+      {
+        "date": "Oct 15, 2026",
+        "opponent": "Lampeter-Strasburg High School",
+        "homeAway": "Home",
+        "eventType": "",
+        "time": "4:00 PM"
+      },
+      {
+        "date": "Oct 16, 2026",
+        "opponent": "Pequea Valley Secondary School",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "7:00 PM"
+      },
+      {
+        "date": "Oct 19, 2026",
+        "opponent": "Boys JV Football",
+        "homeAway": "Home",
+        "eventType": "JV",
+        "time": "4:00 PM"
+      },
+      {
+        "date": "Oct 22, 2026",
+        "opponent": "Columbia High School/Columbia Middle School",
+        "homeAway": "Home",
+        "eventType": "",
+        "time": "4:00 PM"
+      },
+      {
+        "date": "Oct 23, 2026",
+        "opponent": "Columbia High School/Columbia Middle School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "7:00 PM"
+      },
+      {
+        "date": "Oct 26, 2026",
+        "opponent": "Columbia High School/Columbia Middle School",
+        "homeAway": "Away",
+        "eventType": "JV",
+        "time": "4:00 PM"
+      },
+      {
+        "date": "Oct 28, 2026",
+        "opponent": "Octorara Area Senior High School",
+        "homeAway": "Away",
+        "eventType": "",
+        "time": "4:00 PM"
+      },
+      {
+        "date": "Oct 30, 2026",
+        "opponent": "Berks Catholic High School",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "7:00 PM"
+      },
+      {
+        "date": "Nov 2, 2026",
+        "opponent": "Berks Catholic High School",
+        "homeAway": "Home",
+        "eventType": "JV",
+        "time": "4:00 PM"
+      },
+      {
+        "date": "Sep 23, 2027",
+        "opponent": "Fleetwood Area High School",
+        "homeAway": "Home",
+        "eventType": "",
+        "time": "4:00 PM"
+      },
+      {
+        "date": "Sep 30, 2027",
+        "opponent": "Cocalico Senior High School",
+        "homeAway": "Away",
+        "eventType": "",
+        "time": "4:00 PM"
+      },
+      {
+        "date": "Oct 7, 2027",
+        "opponent": "Schuylkill Valley High School",
+        "homeAway": "Home",
+        "eventType": "",
+        "time": "7:00 PM"
+      },
+      {
+        "date": "Oct 14, 2027",
+        "opponent": "Lampeter-Strasburg High School",
+        "homeAway": "Away",
+        "eventType": "",
+        "time": "4:00 PM"
+      },
+      {
+        "date": "Oct 15, 2027",
+        "opponent": "Pequea Valley Secondary School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "7:00 PM"
+      },
+      {
+        "date": "Oct 21, 2027",
+        "opponent": "Columbia High School/Columbia Middle School",
+        "homeAway": "Away",
+        "eventType": "",
+        "time": "4:00 PM"
       }
     ],
     "roster": [],
-    "image": "/football-hero.jpeg"
+    "image": "/football-hero.jpeg",
+    "imagePosition": "50% 46%"
   },
   "boys-soccer": {
     "schedule": [
@@ -332,5 +701,2264 @@
     "coach": "Bryan Fossi",
     "coachEmail": "bfossi@lchsyes.org",
     "description": "Lancaster Catholic Boys Soccer is a proud, tradition-rich program dedicated to developing student-athletes who compete with skill, discipline, and heart. Rooted in the values of Lancaster Catholic High School, the program emphasizes teamwork, leadership, and respect—on and off the field. Through a commitment to hard work, sportsmanship, and continuous improvement, Lancaster Catholic Soccer prepares players not only for competitive success, but also for growth as confident leaders and teammates who represent their school and community with pride."
+  },
+  "cross-country": {
+    "schedule": [
+      {
+        "date": "Aug 23, 2025",
+        "opponent": "Warwick Senior High School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "7:00 PM"
+      },
+      {
+        "date": "Aug 23, 2025",
+        "opponent": "Warwick Senior High School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "7:00 PM"
+      },
+      {
+        "date": "Aug 28, 2025",
+        "opponent": "York Catholic High School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "4:00 PM"
+      },
+      {
+        "date": "Aug 28, 2025",
+        "opponent": "York Catholic High School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "4:00 PM"
+      },
+      {
+        "date": "Sep 2, 2025",
+        "opponent": "Eastern Lebanon County",
+        "homeAway": "Away",
+        "eventType": "",
+        "time": "4:15 PM"
+      },
+      {
+        "date": "Sep 2, 2025",
+        "opponent": "Eastern Lebanon County",
+        "homeAway": "Away",
+        "eventType": "",
+        "time": "4:15 PM"
+      },
+      {
+        "date": "Sep 2, 2025",
+        "opponent": "Eastern Lebanon County",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "4:45 PM"
+      },
+      {
+        "date": "Sep 2, 2025",
+        "opponent": "Eastern Lebanon County",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "4:45 PM"
+      },
+      {
+        "date": "Sep 9, 2025",
+        "opponent": "Northern Lebanon HS/MS",
+        "homeAway": "Home",
+        "eventType": "",
+        "time": "4:15 PM"
+      },
+      {
+        "date": "Sep 9, 2025",
+        "opponent": "Northern Lebanon HS/MS",
+        "homeAway": "Home",
+        "eventType": "",
+        "time": "4:15 PM"
+      },
+      {
+        "date": "Sep 9, 2025",
+        "opponent": "Northern Lebanon HS/MS",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "4:45 PM"
+      },
+      {
+        "date": "Sep 9, 2025",
+        "opponent": "Northern Lebanon HS/MS",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "5:15 PM"
+      },
+      {
+        "date": "Sep 23, 2025",
+        "opponent": "Pequea Valley Secondary School",
+        "homeAway": "Away",
+        "eventType": "",
+        "time": "4:15 PM"
+      },
+      {
+        "date": "Sep 23, 2025",
+        "opponent": "Pequea Valley Secondary School",
+        "homeAway": "Away",
+        "eventType": "",
+        "time": "4:15 PM"
+      },
+      {
+        "date": "Sep 23, 2025",
+        "opponent": "Pequea Valley Secondary School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "4:45 PM"
+      },
+      {
+        "date": "Sep 24, 2025",
+        "opponent": "Pequea Valley Secondary School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "3:45 PM"
+      },
+      {
+        "date": "Oct 4, 2025",
+        "opponent": "Cedar Crest High School",
+        "homeAway": "Away",
+        "eventType": "",
+        "time": "8:00 AM"
+      },
+      {
+        "date": "Oct 4, 2025",
+        "opponent": "Cedar Crest High School",
+        "homeAway": "Away",
+        "eventType": "",
+        "time": "8:00 AM"
+      },
+      {
+        "date": "Oct 7, 2025",
+        "opponent": "Annville-Cleona High School",
+        "homeAway": "Away",
+        "eventType": "",
+        "time": "4:15 PM"
+      },
+      {
+        "date": "Oct 7, 2025",
+        "opponent": "Annville-Cleona High School",
+        "homeAway": "Away",
+        "eventType": "",
+        "time": "4:15 PM"
+      },
+      {
+        "date": "Oct 7, 2025",
+        "opponent": "Annville-Cleona High School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "4:45 PM"
+      },
+      {
+        "date": "Oct 7, 2025",
+        "opponent": "Annville-Cleona High School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "5:15 PM"
+      },
+      {
+        "date": "Oct 9, 2025",
+        "opponent": "Solanco High School",
+        "homeAway": "Away",
+        "eventType": "JV",
+        "time": "4:00 PM"
+      },
+      {
+        "date": "Oct 9, 2025",
+        "opponent": "Solanco High School",
+        "homeAway": "Away",
+        "eventType": "JV",
+        "time": "4:30 PM"
+      },
+      {
+        "date": "Oct 10, 2025",
+        "opponent": "Lancaster Mennonite School",
+        "homeAway": "Away",
+        "eventType": "",
+        "time": "3:00 PM"
+      },
+      {
+        "date": "Oct 10, 2025",
+        "opponent": "Lancaster Mennonite School",
+        "homeAway": "Away",
+        "eventType": "",
+        "time": "3:30 PM"
+      },
+      {
+        "date": "Oct 14, 2025",
+        "opponent": "Annville-Cleona High School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "4:00 PM"
+      },
+      {
+        "date": "Oct 14, 2025",
+        "opponent": "Annville-Cleona High School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "4:00 PM"
+      },
+      {
+        "date": "Oct 14, 2025",
+        "opponent": "Annville-Cleona High School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "4:45 PM"
+      },
+      {
+        "date": "Sep 15, 2026",
+        "opponent": "Pequea Valley Secondary School",
+        "homeAway": "Away",
+        "eventType": "",
+        "time": "4:15 PM"
+      },
+      {
+        "date": "Sep 15, 2026",
+        "opponent": "Pequea Valley Secondary School",
+        "homeAway": "Away",
+        "eventType": "",
+        "time": "4:15 PM"
+      },
+      {
+        "date": "Sep 15, 2026",
+        "opponent": "Pequea Valley Secondary School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "4:45 PM"
+      },
+      {
+        "date": "Sep 15, 2026",
+        "opponent": "Pequea Valley Secondary School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "5:15 PM"
+      },
+      {
+        "date": "Oct 6, 2026",
+        "opponent": "Octorara Area Senior High School",
+        "homeAway": "Away",
+        "eventType": "",
+        "time": "4:15 PM"
+      },
+      {
+        "date": "Sep 21, 2027",
+        "opponent": "Eastern Lebanon County",
+        "homeAway": "Away",
+        "eventType": "",
+        "time": "4:15 PM"
+      },
+      {
+        "date": "Sep 21, 2027",
+        "opponent": "Eastern Lebanon County",
+        "homeAway": "Away",
+        "eventType": "",
+        "time": "4:15 PM"
+      },
+      {
+        "date": "Sep 21, 2027",
+        "opponent": "Eastern Lebanon County",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "4:15 PM"
+      },
+      {
+        "date": "Sep 21, 2027",
+        "opponent": "Eastern Lebanon County",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "4:45 PM"
+      }
+    ]
+  },
+  "volleyball": {
+    "schedule": [
+      {
+        "date": "Aug 26, 2025",
+        "opponent": "Berks Catholic High School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "6:00 PM"
+      },
+      {
+        "date": "Aug 28, 2025",
+        "opponent": "Northern Lebanon HS/MS",
+        "homeAway": "Home",
+        "eventType": "JV",
+        "time": "6:00 PM"
+      },
+      {
+        "date": "Aug 28, 2025",
+        "opponent": "Northern Lebanon HS/MS",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "7:00 PM"
+      },
+      {
+        "date": "Sep 2, 2025",
+        "opponent": "Donegal High School",
+        "homeAway": "Away",
+        "eventType": "JV",
+        "time": "6:00 PM"
+      },
+      {
+        "date": "Sep 2, 2025",
+        "opponent": "Donegal High School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "7:00 PM"
+      },
+      {
+        "date": "Sep 4, 2025",
+        "opponent": "Lancaster Mennonite School",
+        "homeAway": "Home",
+        "eventType": "JV",
+        "time": "6:00 PM"
+      },
+      {
+        "date": "Sep 4, 2025",
+        "opponent": "Lancaster Mennonite School",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "7:00 PM"
+      },
+      {
+        "date": "Sep 9, 2025",
+        "opponent": "Octorara Area Senior High School",
+        "homeAway": "Home",
+        "eventType": "JV",
+        "time": "6:00 PM"
+      },
+      {
+        "date": "Sep 9, 2025",
+        "opponent": "Octorara Area Senior High School",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "7:00 PM"
+      },
+      {
+        "date": "Sep 11, 2025",
+        "opponent": "JP McCaskey High School Campus",
+        "homeAway": "Away",
+        "eventType": "JV",
+        "time": "6:00 PM"
+      },
+      {
+        "date": "Sep 11, 2025",
+        "opponent": "JP McCaskey High School Campus",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "7:00 PM"
+      },
+      {
+        "date": "Sep 16, 2025",
+        "opponent": "Lebanon High School",
+        "homeAway": "Home",
+        "eventType": "JV",
+        "time": "6:00 PM"
+      },
+      {
+        "date": "Sep 16, 2025",
+        "opponent": "Lebanon High School",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "7:00 PM"
+      },
+      {
+        "date": "Sep 18, 2025",
+        "opponent": "Columbia High School/Columbia Middle School",
+        "homeAway": "Away",
+        "eventType": "JV",
+        "time": "6:00 PM"
+      },
+      {
+        "date": "Sep 18, 2025",
+        "opponent": "Columbia High School/Columbia Middle School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "7:00 PM"
+      },
+      {
+        "date": "Sep 22, 2025",
+        "opponent": "Trinity High School",
+        "homeAway": "Home",
+        "eventType": "JV",
+        "time": "6:00 PM"
+      },
+      {
+        "date": "Sep 22, 2025",
+        "opponent": "Trinity High School",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "7:00 PM"
+      },
+      {
+        "date": "Sep 23, 2025",
+        "opponent": "Northern Lebanon HS/MS",
+        "homeAway": "Away",
+        "eventType": "JV",
+        "time": "6:00 PM"
+      },
+      {
+        "date": "Sep 23, 2025",
+        "opponent": "Northern Lebanon HS/MS",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "7:00 PM"
+      },
+      {
+        "date": "Sep 25, 2025",
+        "opponent": "Linden Hall School for Girls",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "6:00 PM"
+      },
+      {
+        "date": "Sep 29, 2025",
+        "opponent": "Upper Dauphin Area High School",
+        "homeAway": "Home",
+        "eventType": "JV",
+        "time": "6:00 PM"
+      },
+      {
+        "date": "Sep 29, 2025",
+        "opponent": "Upper Dauphin Area High School",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "7:00 PM"
+      },
+      {
+        "date": "Sep 30, 2025",
+        "opponent": "Lancaster Mennonite School",
+        "homeAway": "Away",
+        "eventType": "JV",
+        "time": "6:00 PM"
+      },
+      {
+        "date": "Sep 30, 2025",
+        "opponent": "Lancaster Mennonite School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "7:00 PM"
+      },
+      {
+        "date": "Oct 2, 2025",
+        "opponent": "Octorara Area Senior High School",
+        "homeAway": "Away",
+        "eventType": "JV",
+        "time": "6:00 PM"
+      },
+      {
+        "date": "Oct 2, 2025",
+        "opponent": "Octorara Area Senior High School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "7:00 PM"
+      },
+      {
+        "date": "Oct 4, 2025",
+        "opponent": "Northeastern Senior High School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "8:30 AM"
+      },
+      {
+        "date": "Oct 6, 2025",
+        "opponent": "Millersburg High School",
+        "homeAway": "Away",
+        "eventType": "JV",
+        "time": "5:30 PM"
+      },
+      {
+        "date": "Oct 6, 2025",
+        "opponent": "Millersburg High School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "6:30 PM"
+      },
+      {
+        "date": "Oct 7, 2025",
+        "opponent": "JP McCaskey High School Campus",
+        "homeAway": "Home",
+        "eventType": "JV",
+        "time": "6:00 PM"
+      },
+      {
+        "date": "Oct 7, 2025",
+        "opponent": "JP McCaskey High School Campus",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "7:00 PM"
+      },
+      {
+        "date": "Oct 9, 2025",
+        "opponent": "Lebanon High School",
+        "homeAway": "Away",
+        "eventType": "JV",
+        "time": "6:00 PM"
+      },
+      {
+        "date": "Oct 9, 2025",
+        "opponent": "Lebanon High School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "7:30 PM"
+      },
+      {
+        "date": "Oct 13, 2025",
+        "opponent": "Columbia High School/Columbia Middle School",
+        "homeAway": "Home",
+        "eventType": "JV",
+        "time": "6:00 PM"
+      },
+      {
+        "date": "Oct 13, 2025",
+        "opponent": "Columbia High School/Columbia Middle School",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "7:00 PM"
+      },
+      {
+        "date": "Sep 1, 2026",
+        "opponent": "JP McCaskey High School Campus",
+        "homeAway": "Away",
+        "eventType": "JV",
+        "time": "6:00 PM"
+      },
+      {
+        "date": "Sep 1, 2026",
+        "opponent": "JP McCaskey High School Campus",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "7:00 PM"
+      },
+      {
+        "date": "Sep 3, 2026",
+        "opponent": "Northern Lebanon HS/MS",
+        "homeAway": "Home",
+        "eventType": "JV",
+        "time": "6:00 PM"
+      },
+      {
+        "date": "Sep 3, 2026",
+        "opponent": "Northern Lebanon HS/MS",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "7:00 PM"
+      },
+      {
+        "date": "Sep 8, 2026",
+        "opponent": "Lancaster Mennonite School",
+        "homeAway": "Away",
+        "eventType": "JV",
+        "time": "6:00 PM"
+      },
+      {
+        "date": "Sep 8, 2026",
+        "opponent": "Lancaster Mennonite School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "7:00 PM"
+      },
+      {
+        "date": "Sep 9, 2026",
+        "opponent": "Linden Hall School for Girls",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "6:00 PM"
+      },
+      {
+        "date": "Sep 10, 2026",
+        "opponent": "Octorara Area Senior High School",
+        "homeAway": "Home",
+        "eventType": "JV",
+        "time": "6:00 PM"
+      },
+      {
+        "date": "Sep 10, 2026",
+        "opponent": "Octorara Area Senior High School",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "7:00 PM"
+      },
+      {
+        "date": "Sep 15, 2026",
+        "opponent": "Columbia High School/Columbia Middle School",
+        "homeAway": "Home",
+        "eventType": "JV",
+        "time": "6:00 PM"
+      },
+      {
+        "date": "Sep 15, 2026",
+        "opponent": "Columbia High School/Columbia Middle School",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "7:00 PM"
+      },
+      {
+        "date": "Sep 17, 2026",
+        "opponent": "Donegal High School",
+        "homeAway": "Away",
+        "eventType": "JV",
+        "time": "6:00 PM"
+      },
+      {
+        "date": "Sep 17, 2026",
+        "opponent": "Donegal High School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "7:00 PM"
+      },
+      {
+        "date": "Sep 19, 2026",
+        "opponent": "Upper Dauphin Area High School",
+        "homeAway": "Home",
+        "eventType": "JV",
+        "time": "11:00 AM"
+      },
+      {
+        "date": "Sep 19, 2026",
+        "opponent": "Upper Dauphin Area High School",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "12:00 PM"
+      },
+      {
+        "date": "Sep 22, 2026",
+        "opponent": "Lebanon High School",
+        "homeAway": "Home",
+        "eventType": "JV",
+        "time": "6:00 PM"
+      },
+      {
+        "date": "Sep 22, 2026",
+        "opponent": "Lebanon High School",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "7:00 PM"
+      },
+      {
+        "date": "Sep 24, 2026",
+        "opponent": "JP McCaskey High School Campus",
+        "homeAway": "Home",
+        "eventType": "JV",
+        "time": "6:00 PM"
+      },
+      {
+        "date": "Sep 24, 2026",
+        "opponent": "JP McCaskey High School Campus",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "7:00 PM"
+      },
+      {
+        "date": "Sep 29, 2026",
+        "opponent": "Northern Lebanon HS/MS",
+        "homeAway": "Away",
+        "eventType": "JV",
+        "time": "6:00 PM"
+      },
+      {
+        "date": "Sep 29, 2026",
+        "opponent": "Northern Lebanon HS/MS",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "7:00 PM"
+      },
+      {
+        "date": "Oct 1, 2026",
+        "opponent": "Lancaster Mennonite School",
+        "homeAway": "Home",
+        "eventType": "JV",
+        "time": "6:00 PM"
+      },
+      {
+        "date": "Oct 1, 2026",
+        "opponent": "Lancaster Mennonite School",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "7:00 PM"
+      },
+      {
+        "date": "Oct 6, 2026",
+        "opponent": "Octorara Area Senior High School",
+        "homeAway": "Away",
+        "eventType": "JV",
+        "time": "6:00 PM"
+      },
+      {
+        "date": "Oct 6, 2026",
+        "opponent": "Octorara Area Senior High School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "7:00 PM"
+      },
+      {
+        "date": "Oct 8, 2026",
+        "opponent": "Columbia High School/Columbia Middle School",
+        "homeAway": "Away",
+        "eventType": "JV",
+        "time": "6:00 PM"
+      },
+      {
+        "date": "Oct 8, 2026",
+        "opponent": "Columbia High School/Columbia Middle School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "7:00 PM"
+      },
+      {
+        "date": "Oct 13, 2026",
+        "opponent": "Donegal High School",
+        "homeAway": "Home",
+        "eventType": "JV",
+        "time": "6:00 PM"
+      },
+      {
+        "date": "Oct 13, 2026",
+        "opponent": "Donegal High School",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "7:00 PM"
+      },
+      {
+        "date": "Sep 2, 2027",
+        "opponent": "Northern Lebanon HS/MS",
+        "homeAway": "Away",
+        "eventType": "JV",
+        "time": "6:00 PM"
+      },
+      {
+        "date": "Sep 2, 2027",
+        "opponent": "Northern Lebanon HS/MS",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "7:00 PM"
+      },
+      {
+        "date": "Sep 9, 2027",
+        "opponent": "Octorara Area Senior High School",
+        "homeAway": "Away",
+        "eventType": "JV",
+        "time": "6:00 PM"
+      },
+      {
+        "date": "Sep 9, 2027",
+        "opponent": "Octorara Area Senior High School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "7:00 PM"
+      },
+      {
+        "date": "Sep 14, 2027",
+        "opponent": "Columbia High School/Columbia Middle School",
+        "homeAway": "Away",
+        "eventType": "JV",
+        "time": "6:00 PM"
+      },
+      {
+        "date": "Sep 14, 2027",
+        "opponent": "Columbia High School/Columbia Middle School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "7:00 PM"
+      },
+      {
+        "date": "Sep 18, 2027",
+        "opponent": "Upper Dauphin Area High School",
+        "homeAway": "Away",
+        "eventType": "JV",
+        "time": "11:00 AM"
+      },
+      {
+        "date": "Sep 18, 2027",
+        "opponent": "Upper Dauphin Area High School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "12:00 PM"
+      },
+      {
+        "date": "Sep 23, 2027",
+        "opponent": "JP McCaskey High School Campus",
+        "homeAway": "Away",
+        "eventType": "JV",
+        "time": "6:00 PM"
+      },
+      {
+        "date": "Sep 23, 2027",
+        "opponent": "JP McCaskey High School Campus",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "7:00 PM"
+      },
+      {
+        "date": "Sep 30, 2027",
+        "opponent": "Lancaster Mennonite School",
+        "homeAway": "Away",
+        "eventType": "JV",
+        "time": "6:00 PM"
+      },
+      {
+        "date": "Sep 30, 2027",
+        "opponent": "Lancaster Mennonite School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "7:00 PM"
+      }
+    ]
+  },
+  "field-hockey": {
+    "schedule": [
+      {
+        "date": "Aug 26, 2025",
+        "opponent": "Octorara Area Senior High School",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "7:00 PM"
+      },
+      {
+        "date": "Aug 28, 2025",
+        "opponent": "Solanco High School",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "7:00 PM"
+      },
+      {
+        "date": "Sep 2, 2025",
+        "opponent": "Tulpehocken Senior High School",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "6:30 PM"
+      },
+      {
+        "date": "Sep 6, 2025",
+        "opponent": "Berks Catholic High School",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "1:00 PM"
+      },
+      {
+        "date": "Sep 6, 2025",
+        "opponent": "Berks Catholic High School",
+        "homeAway": "Home",
+        "eventType": "JV",
+        "time": "2:30 PM"
+      },
+      {
+        "date": "Sep 9, 2025",
+        "opponent": "Lancaster Mennonite School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "7:00 PM"
+      },
+      {
+        "date": "Sep 11, 2025",
+        "opponent": "Lebanon High School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "4:00 PM"
+      },
+      {
+        "date": "Sep 13, 2025",
+        "opponent": "Donegal High School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "8:00 AM"
+      },
+      {
+        "date": "Sep 13, 2025",
+        "opponent": "2025 Donegal Field Hockey Tournament",
+        "homeAway": "Home",
+        "eventType": "Tournament",
+        "time": "8:00 AM"
+      },
+      {
+        "date": "Sep 15, 2025",
+        "opponent": "JP McCaskey High School Campus",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "4:00 PM"
+      },
+      {
+        "date": "Sep 16, 2025",
+        "opponent": "Hamburg Area High School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "6:00 PM"
+      },
+      {
+        "date": "Sep 16, 2025",
+        "opponent": "Hamburg Area High School",
+        "homeAway": "Away",
+        "eventType": "JV",
+        "time": "7:30 PM"
+      },
+      {
+        "date": "Sep 17, 2025",
+        "opponent": "Lancaster Country Day School",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "3:30 PM"
+      },
+      {
+        "date": "Sep 23, 2025",
+        "opponent": "Lancaster Mennonite School",
+        "homeAway": "Home",
+        "eventType": "JV",
+        "time": "3:30 PM"
+      },
+      {
+        "date": "Sep 29, 2025",
+        "opponent": "JP McCaskey High School Campus",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "7:00 PM"
+      },
+      {
+        "date": "Oct 1, 2025",
+        "opponent": "Lancaster Country Day School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "3:45 PM"
+      },
+      {
+        "date": "Oct 4, 2025",
+        "opponent": "Eastern York High School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "10:00 AM"
+      },
+      {
+        "date": "Oct 7, 2025",
+        "opponent": "Lancaster Mennonite School",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "4:00 PM"
+      },
+      {
+        "date": "Sep 2, 2026",
+        "opponent": "JP McCaskey High School Campus",
+        "homeAway": "Home",
+        "eventType": "JV",
+        "time": "12:01 AM"
+      },
+      {
+        "date": "Sep 2, 2026",
+        "opponent": "JP McCaskey High School Campus",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "12:01 AM"
+      },
+      {
+        "date": "Sep 8, 2026",
+        "opponent": "Octorara Area Senior High School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "4:00 PM"
+      },
+      {
+        "date": "Sep 8, 2026",
+        "opponent": "Octorara Area Senior High School",
+        "homeAway": "Away",
+        "eventType": "JV",
+        "time": "5:15 PM"
+      },
+      {
+        "date": "Sep 24, 2026",
+        "opponent": "Eastern Lebanon County",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "4:00 PM"
+      },
+      {
+        "date": "Sep 30, 2026",
+        "opponent": "Solanco High School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "4:00 PM"
+      },
+      {
+        "date": "Sep 30, 2026",
+        "opponent": "Solanco High School",
+        "homeAway": "Away",
+        "eventType": "JV",
+        "time": "5:30 PM"
+      },
+      {
+        "date": "Oct 2, 2026",
+        "opponent": "Northern Lebanon HS/MS",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "3:30 PM"
+      },
+      {
+        "date": "Oct 2, 2026",
+        "opponent": "Northern Lebanon HS/MS",
+        "homeAway": "Away",
+        "eventType": "JV",
+        "time": "5:00 PM"
+      },
+      {
+        "date": "Oct 6, 2026",
+        "opponent": "Lancaster Country Day School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "4:00 PM"
+      },
+      {
+        "date": "Oct 6, 2026",
+        "opponent": "Lancaster Country Day School",
+        "homeAway": "Away",
+        "eventType": "JV",
+        "time": "5:30 PM"
+      },
+      {
+        "date": "Oct 8, 2026",
+        "opponent": "Lancaster Mennonite School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "4:00 PM"
+      },
+      {
+        "date": "Oct 8, 2026",
+        "opponent": "Lancaster Mennonite School",
+        "homeAway": "Away",
+        "eventType": "JV",
+        "time": "5:30 PM"
+      },
+      {
+        "date": "Sep 1, 2027",
+        "opponent": "JP McCaskey High School Campus",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "4:00 PM"
+      },
+      {
+        "date": "Sep 1, 2027",
+        "opponent": "JP McCaskey High School Campus",
+        "homeAway": "Away",
+        "eventType": "JV",
+        "time": "5:30 PM"
+      },
+      {
+        "date": "Sep 15, 2027",
+        "opponent": "Lancaster Country Day School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "4:00 PM"
+      },
+      {
+        "date": "Sep 15, 2027",
+        "opponent": "Lancaster Country Day School",
+        "homeAway": "Away",
+        "eventType": "JV",
+        "time": "5:30 PM"
+      },
+      {
+        "date": "Sep 17, 2027",
+        "opponent": "Lancaster Mennonite School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "4:00 PM"
+      },
+      {
+        "date": "Sep 17, 2027",
+        "opponent": "Lancaster Mennonite School",
+        "homeAway": "Away",
+        "eventType": "JV",
+        "time": "5:30 PM"
+      },
+      {
+        "date": "Sep 27, 2027",
+        "opponent": "Octorara Area Senior High School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "4:00 PM"
+      },
+      {
+        "date": "Sep 27, 2027",
+        "opponent": "Octorara Area Senior High School",
+        "homeAway": "Away",
+        "eventType": "JV",
+        "time": "5:15 PM"
+      },
+      {
+        "date": "Oct 1, 2027",
+        "opponent": "Northern Lebanon HS/MS",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "4:00 PM"
+      },
+      {
+        "date": "Oct 1, 2027",
+        "opponent": "Northern Lebanon HS/MS",
+        "homeAway": "Away",
+        "eventType": "JV",
+        "time": "5:30 PM"
+      },
+      {
+        "date": "Oct 4, 2027",
+        "opponent": "Eastern York High School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "4:00 PM"
+      },
+      {
+        "date": "Oct 13, 2027",
+        "opponent": "Eastern Lebanon County",
+        "homeAway": "Away",
+        "eventType": "JV",
+        "time": "5:30 PM"
+      },
+      {
+        "date": "Oct 13, 2027",
+        "opponent": "Eastern Lebanon County",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "7:00 PM"
+      }
+    ]
+  },
+  "boys-wrestling": {
+    "schedule": [
+      {
+        "date": "Dec 3, 2025",
+        "opponent": "Warwick Senior High School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "3:30 PM"
+      },
+      {
+        "date": "Dec 6, 2025",
+        "opponent": "Donegal High School",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "6:00 PM"
+      },
+      {
+        "date": "Dec 8, 2025",
+        "opponent": "Annville-Cleona High School",
+        "homeAway": "Away",
+        "eventType": "",
+        "time": "5:00 PM"
+      },
+      {
+        "date": "Dec 8, 2025",
+        "opponent": "Annville-Cleona High School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "5:00 PM"
+      },
+      {
+        "date": "Dec 8, 2025",
+        "opponent": "Annville-Cleona High School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "7:00 PM"
+      },
+      {
+        "date": "Dec 17, 2025",
+        "opponent": "Northern Lebanon HS/MS",
+        "homeAway": "Home",
+        "eventType": "",
+        "time": "4:30 PM"
+      },
+      {
+        "date": "Dec 17, 2025",
+        "opponent": "Northern Lebanon HS/MS",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "6:00 PM"
+      },
+      {
+        "date": "Dec 17, 2025",
+        "opponent": "Northern Lebanon HS/MS",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "7:00 PM"
+      },
+      {
+        "date": "Dec 20, 2025",
+        "opponent": "Girls Varsity Wrestling",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "8:00 AM"
+      },
+      {
+        "date": "Dec 20, 2025",
+        "opponent": "Eastern Lebanon County",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "12:30 PM"
+      },
+      {
+        "date": "Jan 6, 2026",
+        "opponent": "Pequea Valley Secondary School",
+        "homeAway": "Away",
+        "eventType": "",
+        "time": "5:30 PM"
+      },
+      {
+        "date": "Jan 6, 2026",
+        "opponent": "Pequea Valley Secondary School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "7:00 PM"
+      },
+      {
+        "date": "Jan 8, 2026",
+        "opponent": "Eastern Lebanon County",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "7:00 PM"
+      },
+      {
+        "date": "Jan 10, 2026",
+        "opponent": "Lebanon High School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "7:00 AM"
+      },
+      {
+        "date": "Jan 14, 2026",
+        "opponent": "Donegal High School",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "4:00 PM"
+      },
+      {
+        "date": "Jan 14, 2026",
+        "opponent": "Columbia High School/Columbia Middle School",
+        "homeAway": "Home",
+        "eventType": "",
+        "time": "5:00 PM"
+      },
+      {
+        "date": "Jan 14, 2026",
+        "opponent": "Donegal High School",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "6:00 PM"
+      },
+      {
+        "date": "Jan 14, 2026",
+        "opponent": "Columbia High School/Columbia Middle School",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "7:00 PM"
+      },
+      {
+        "date": "Jan 14, 2026",
+        "opponent": "Columbia High School/Columbia Middle School",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "8:00 PM"
+      },
+      {
+        "date": "Jan 18, 2026",
+        "opponent": "Lebanon High School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "8:00 AM"
+      },
+      {
+        "date": "Jan 21, 2026",
+        "opponent": "Octorara Area Senior High School",
+        "homeAway": "Away",
+        "eventType": "",
+        "time": "5:30 PM"
+      },
+      {
+        "date": "Jan 21, 2026",
+        "opponent": "Octorara Area Senior High School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "6:00 PM"
+      },
+      {
+        "date": "Jan 21, 2026",
+        "opponent": "Octorara Area Senior High School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "7:00 PM"
+      },
+      {
+        "date": "Jan 31, 2026",
+        "opponent": "Elizabethtown Area High School",
+        "homeAway": "Away",
+        "eventType": "",
+        "time": "8:00 AM"
+      },
+      {
+        "date": "Feb 4, 2026",
+        "opponent": "JP McCaskey High School Campus",
+        "homeAway": "Home",
+        "eventType": "",
+        "time": "5:30 PM"
+      },
+      {
+        "date": "Feb 4, 2026",
+        "opponent": "JP McCaskey High School Campus",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "7:00 PM"
+      },
+      {
+        "date": "Dec 9, 2026",
+        "opponent": "Northern Lebanon HS/MS",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "6:30 PM"
+      },
+      {
+        "date": "Jan 20, 2027",
+        "opponent": "Pequea Valley Secondary School",
+        "homeAway": "Away",
+        "eventType": "",
+        "time": "5:30 PM"
+      },
+      {
+        "date": "Jan 20, 2027",
+        "opponent": "Pequea Valley Secondary School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "7:00 PM"
+      },
+      {
+        "date": "Dec 15, 2027",
+        "opponent": "Columbia High School/Columbia Middle School",
+        "homeAway": "Away",
+        "eventType": "",
+        "time": "5:00 PM"
+      },
+      {
+        "date": "Dec 15, 2027",
+        "opponent": "Columbia High School/Columbia Middle School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "6:00 PM"
+      },
+      {
+        "date": "Dec 15, 2027",
+        "opponent": "Columbia High School/Columbia Middle School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "7:00 PM"
+      },
+      {
+        "date": "Jan 12, 2028",
+        "opponent": "Octorara Area Senior High School",
+        "homeAway": "Away",
+        "eventType": "",
+        "time": "5:30 PM"
+      },
+      {
+        "date": "Jan 12, 2028",
+        "opponent": "Octorara Area Senior High School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "6:00 PM"
+      },
+      {
+        "date": "Jan 12, 2028",
+        "opponent": "Octorara Area Senior High School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "7:00 PM"
+      },
+      {
+        "date": "Jan 19, 2028",
+        "opponent": "Eastern Lebanon County",
+        "homeAway": "Away",
+        "eventType": "",
+        "time": "5:30 PM"
+      },
+      {
+        "date": "Jan 19, 2028",
+        "opponent": "Eastern Lebanon County",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "7:00 PM"
+      }
+    ]
+  },
+  "swimming": {
+    "schedule": [
+      {
+        "date": "Dec 10, 2025",
+        "opponent": "Conestoga Valley Senior High School",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "7:30 PM"
+      },
+      {
+        "date": "Dec 10, 2025",
+        "opponent": "Conestoga Valley Senior High School",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "7:30 PM"
+      },
+      {
+        "date": "Dec 17, 2025",
+        "opponent": "Elizabethtown Area High School",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "7:30 PM"
+      },
+      {
+        "date": "Dec 17, 2025",
+        "opponent": "Elizabethtown Area High School",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "7:30 PM"
+      },
+      {
+        "date": "Jan 8, 2026",
+        "opponent": "Penn Manor High School",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "7:30 PM"
+      },
+      {
+        "date": "Jan 8, 2026",
+        "opponent": "Penn Manor High School",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "7:30 PM"
+      },
+      {
+        "date": "Jan 13, 2026",
+        "opponent": "Lampeter-Strasburg High School",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "7:30 PM"
+      },
+      {
+        "date": "Jan 13, 2026",
+        "opponent": "Lampeter-Strasburg High School",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "7:30 PM"
+      },
+      {
+        "date": "Jan 15, 2026",
+        "opponent": "JP McCaskey High School Campus",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "7:30 PM"
+      },
+      {
+        "date": "Jan 15, 2026",
+        "opponent": "JP McCaskey High School Campus",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "7:30 PM"
+      },
+      {
+        "date": "Jan 20, 2026",
+        "opponent": "Cocalico Senior High School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "6:00 PM"
+      },
+      {
+        "date": "Jan 20, 2026",
+        "opponent": "Cocalico Senior High School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "6:00 PM"
+      },
+      {
+        "date": "Jan 30, 2026",
+        "opponent": "Manheim Central High School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "12:01 AM"
+      },
+      {
+        "date": "Jan 30, 2026",
+        "opponent": "Manheim Central High School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "7:30 PM"
+      },
+      {
+        "date": "Feb 5, 2026",
+        "opponent": "JP McCaskey High School Campus",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "6:00 PM"
+      },
+      {
+        "date": "Feb 6, 2026",
+        "opponent": "JP McCaskey High School Campus",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "7:00 PM"
+      }
+    ]
+  },
+  "baseball": {
+    "schedule": [
+      {
+        "date": "Mar 7, 2026",
+        "opponent": "Hamburg Area High School",
+        "homeAway": "Away",
+        "eventType": "JV",
+        "time": "12:00 PM"
+      },
+      {
+        "date": "Mar 7, 2026",
+        "opponent": "Hamburg Area High School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "12:00 PM"
+      },
+      {
+        "date": "Mar 9, 2026",
+        "opponent": "Solanco High School",
+        "homeAway": "Home",
+        "eventType": "JV",
+        "time": "4:15 PM"
+      },
+      {
+        "date": "Mar 9, 2026",
+        "opponent": "Solanco High School",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "4:15 PM"
+      },
+      {
+        "date": "Mar 13, 2026",
+        "opponent": "Delone Catholic High School",
+        "homeAway": "Home",
+        "eventType": "JV",
+        "time": "4:15 PM"
+      },
+      {
+        "date": "Mar 13, 2026",
+        "opponent": "Delone Catholic High School",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "4:15 PM"
+      },
+      {
+        "date": "Mar 16, 2026",
+        "opponent": "Boiling Springs High School",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "4:15 PM"
+      },
+      {
+        "date": "Mar 16, 2026",
+        "opponent": "Boiling Springs High School",
+        "homeAway": "Away",
+        "eventType": "JV",
+        "time": "4:30 PM"
+      },
+      {
+        "date": "Mar 21, 2026",
+        "opponent": "Camp Hill High School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "12:00 PM"
+      },
+      {
+        "date": "Mar 21, 2026",
+        "opponent": "Camp Hill High School",
+        "homeAway": "Away",
+        "eventType": "JV",
+        "time": "2:00 PM"
+      },
+      {
+        "date": "Mar 23, 2026",
+        "opponent": "Muhlenberg High School",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "4:15 PM"
+      },
+      {
+        "date": "Mar 27, 2026",
+        "opponent": "Twin Valley High School",
+        "homeAway": "Away",
+        "eventType": "JV",
+        "time": "4:00 PM"
+      },
+      {
+        "date": "Mar 27, 2026",
+        "opponent": "Twin Valley High School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "4:00 PM"
+      },
+      {
+        "date": "Mar 30, 2026",
+        "opponent": "Eastern York High School",
+        "homeAway": "Away",
+        "eventType": "JV",
+        "time": "4:15 PM"
+      },
+      {
+        "date": "Mar 30, 2026",
+        "opponent": "Eastern York High School",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "4:15 PM"
+      },
+      {
+        "date": "Apr 1, 2026",
+        "opponent": "Pequea Valley Secondary School",
+        "homeAway": "Away",
+        "eventType": "JV",
+        "time": "4:15 PM"
+      },
+      {
+        "date": "Apr 1, 2026",
+        "opponent": "Pequea Valley Secondary School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "4:15 PM"
+      },
+      {
+        "date": "Apr 6, 2026",
+        "opponent": "Lancaster Mennonite School",
+        "homeAway": "Home",
+        "eventType": "JV",
+        "time": "4:15 PM"
+      },
+      {
+        "date": "Apr 6, 2026",
+        "opponent": "Lancaster Mennonite School",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "4:15 PM"
+      },
+      {
+        "date": "Apr 7, 2026",
+        "opponent": "Northern Lebanon HS/MS",
+        "homeAway": "Home",
+        "eventType": "JV",
+        "time": "4:15 PM"
+      },
+      {
+        "date": "Apr 8, 2026",
+        "opponent": "Northern Lebanon HS/MS",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "4:15 PM"
+      },
+      {
+        "date": "Apr 13, 2026",
+        "opponent": "Annville-Cleona High School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "4:15 PM"
+      },
+      {
+        "date": "Apr 14, 2026",
+        "opponent": "Annville-Cleona High School",
+        "homeAway": "Away",
+        "eventType": "JV",
+        "time": "4:15 PM"
+      },
+      {
+        "date": "Apr 15, 2026",
+        "opponent": "Columbia High School/Columbia Middle School",
+        "homeAway": "Home",
+        "eventType": "JV",
+        "time": "4:15 PM"
+      },
+      {
+        "date": "Apr 15, 2026",
+        "opponent": "Columbia High School/Columbia Middle School",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "4:15 PM"
+      },
+      {
+        "date": "Apr 18, 2026",
+        "opponent": "Trinity High School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "4:15 PM"
+      },
+      {
+        "date": "Apr 20, 2026",
+        "opponent": "Pequea Valley Secondary School",
+        "homeAway": "Home",
+        "eventType": "JV",
+        "time": "4:15 PM"
+      },
+      {
+        "date": "Apr 20, 2026",
+        "opponent": "Pequea Valley Secondary School",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "4:15 PM"
+      },
+      {
+        "date": "Apr 22, 2026",
+        "opponent": "Lancaster Mennonite School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "4:15 PM"
+      },
+      {
+        "date": "Apr 23, 2026",
+        "opponent": "Northern Lebanon HS/MS",
+        "homeAway": "Away",
+        "eventType": "JV",
+        "time": "4:15 PM"
+      },
+      {
+        "date": "Apr 27, 2026",
+        "opponent": "Northern Lebanon HS/MS",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "4:15 PM"
+      },
+      {
+        "date": "Apr 29, 2026",
+        "opponent": "Annville-Cleona High School",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "4:15 PM"
+      },
+      {
+        "date": "Apr 30, 2026",
+        "opponent": "Annville-Cleona High School",
+        "homeAway": "Home",
+        "eventType": "JV",
+        "time": "4:15 PM"
+      },
+      {
+        "date": "May 4, 2026",
+        "opponent": "Columbia High School/Columbia Middle School",
+        "homeAway": "Away",
+        "eventType": "JV",
+        "time": "4:15 PM"
+      },
+      {
+        "date": "May 4, 2026",
+        "opponent": "Columbia High School/Columbia Middle School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "4:15 PM"
+      },
+      {
+        "date": "May 7, 2026",
+        "opponent": "Wyomissing Area JSHS",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "4:15 PM"
+      },
+      {
+        "date": "May 11, 2026",
+        "opponent": "Middletown Area High School",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "4:15 PM"
+      },
+      {
+        "date": "May 12, 2026",
+        "opponent": "Middletown Area High School",
+        "homeAway": "Home",
+        "eventType": "JV",
+        "time": "4:15 PM"
+      },
+      {
+        "date": "Mar 15, 2027",
+        "opponent": "Solanco High School",
+        "homeAway": "Away",
+        "eventType": "JV",
+        "time": "4:15 PM"
+      },
+      {
+        "date": "Mar 15, 2027",
+        "opponent": "Solanco High School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "4:15 PM"
+      },
+      {
+        "date": "Apr 7, 2027",
+        "opponent": "Octorara Area Senior High School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "4:15 PM"
+      },
+      {
+        "date": "Apr 12, 2027",
+        "opponent": "Lancaster Mennonite School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "4:00 PM"
+      },
+      {
+        "date": "Apr 19, 2027",
+        "opponent": "Pequea Valley Secondary School",
+        "homeAway": "Away",
+        "eventType": "JV",
+        "time": "5:15 PM"
+      },
+      {
+        "date": "Apr 19, 2027",
+        "opponent": "Pequea Valley Secondary School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "4:15 PM"
+      },
+      {
+        "date": "Apr 21, 2027",
+        "opponent": "Columbia High School/Columbia Middle School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "4:15 PM"
+      },
+      {
+        "date": "May 3, 2027",
+        "opponent": "Northern Lebanon HS/MS",
+        "homeAway": "Away",
+        "eventType": "JV",
+        "time": "4:15 PM"
+      },
+      {
+        "date": "May 3, 2027",
+        "opponent": "Northern Lebanon HS/MS",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "4:15 PM"
+      }
+    ],
+    "image": "/baseball-hero.jpeg"
+  },
+  "softball": {
+    "schedule": [
+      {
+        "date": "Mar 7, 2026",
+        "opponent": "Hamburg Area High School",
+        "homeAway": "Home",
+        "eventType": "JV",
+        "time": "12:00 PM"
+      },
+      {
+        "date": "Mar 7, 2026",
+        "opponent": "Hamburg Area High School",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "12:00 PM"
+      },
+      {
+        "date": "Mar 10, 2026",
+        "opponent": "Conestoga Valley Senior High School",
+        "homeAway": "Away",
+        "eventType": "JV",
+        "time": "4:15 PM"
+      },
+      {
+        "date": "Mar 10, 2026",
+        "opponent": "Conestoga Valley Senior High School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "4:15 PM"
+      },
+      {
+        "date": "Mar 13, 2026",
+        "opponent": "Delone Catholic High School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "4:15 PM"
+      },
+      {
+        "date": "Mar 13, 2026",
+        "opponent": "Delone Catholic High School",
+        "homeAway": "Away",
+        "eventType": "JV",
+        "time": "6:15 PM"
+      },
+      {
+        "date": "Mar 16, 2026",
+        "opponent": "Boiling Springs High School",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "4:15 PM"
+      },
+      {
+        "date": "Mar 16, 2026",
+        "opponent": "Boiling Springs High School",
+        "homeAway": "Away",
+        "eventType": "JV",
+        "time": "4:30 PM"
+      },
+      {
+        "date": "Mar 20, 2026",
+        "opponent": "Camp Hill High School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "4:15 PM"
+      },
+      {
+        "date": "Mar 23, 2026",
+        "opponent": "Northern Lebanon HS/MS",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "4:15 PM"
+      },
+      {
+        "date": "Mar 27, 2026",
+        "opponent": "Dover Area High School",
+        "homeAway": "Away",
+        "eventType": "JV",
+        "time": "4:15 PM"
+      },
+      {
+        "date": "Mar 27, 2026",
+        "opponent": "Dover Area High School",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "4:15 PM"
+      },
+      {
+        "date": "Apr 1, 2026",
+        "opponent": "Pequea Valley Secondary School",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "4:15 PM"
+      },
+      {
+        "date": "Apr 8, 2026",
+        "opponent": "Octorara Area Senior High School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "4:15 PM"
+      },
+      {
+        "date": "Apr 11, 2026",
+        "opponent": "Conrad Weiser",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "11:00 AM"
+      },
+      {
+        "date": "Apr 13, 2026",
+        "opponent": "Annville-Cleona High School",
+        "homeAway": "Home",
+        "eventType": "JV",
+        "time": "4:15 PM"
+      },
+      {
+        "date": "Apr 13, 2026",
+        "opponent": "Annville-Cleona High School",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "4:15 PM"
+      },
+      {
+        "date": "Apr 15, 2026",
+        "opponent": "Columbia High School/Columbia Middle School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "4:15 PM"
+      },
+      {
+        "date": "Apr 17, 2026",
+        "opponent": "JP McCaskey High School Campus",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "4:15 PM"
+      },
+      {
+        "date": "Apr 20, 2026",
+        "opponent": "Pequea Valley Secondary School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "4:15 PM"
+      },
+      {
+        "date": "Apr 22, 2026",
+        "opponent": "Lancaster Mennonite School",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "4:15 PM"
+      },
+      {
+        "date": "Apr 27, 2026",
+        "opponent": "Octorara Area Senior High School",
+        "homeAway": "Home",
+        "eventType": "JV",
+        "time": "4:15 PM"
+      },
+      {
+        "date": "Apr 27, 2026",
+        "opponent": "Octorara Area Senior High School",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "4:15 PM"
+      },
+      {
+        "date": "Apr 29, 2026",
+        "opponent": "Annville-Cleona High School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "4:15 PM"
+      },
+      {
+        "date": "Apr 30, 2026",
+        "opponent": "Middletown Area High School",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "4:15 PM"
+      },
+      {
+        "date": "May 2, 2026",
+        "opponent": "Twin Valley High School",
+        "homeAway": "Away",
+        "eventType": "JV",
+        "time": "12:00 PM"
+      },
+      {
+        "date": "May 2, 2026",
+        "opponent": "Twin Valley High School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "12:00 PM"
+      },
+      {
+        "date": "May 4, 2026",
+        "opponent": "Columbia High School/Columbia Middle School",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "4:15 PM"
+      },
+      {
+        "date": "Mar 13, 2027",
+        "opponent": "York Catholic High School",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "12:00 PM"
+      },
+      {
+        "date": "Mar 31, 2027",
+        "opponent": "Pequea Valley Secondary School",
+        "homeAway": "Away",
+        "eventType": "JV",
+        "time": "5:15 PM"
+      },
+      {
+        "date": "Mar 31, 2027",
+        "opponent": "Pequea Valley Secondary School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "4:15 PM"
+      },
+      {
+        "date": "Apr 5, 2027",
+        "opponent": "Columbia High School/Columbia Middle School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "4:15 PM"
+      },
+      {
+        "date": "Apr 26, 2027",
+        "opponent": "Octorara Area Senior High School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "12:01 AM"
+      },
+      {
+        "date": "Apr 28, 2027",
+        "opponent": "Lancaster Mennonite School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "4:00 PM"
+      }
+    ],
+    "image": "/softball-hero.jpeg"
+  },
+  "track-field": {
+    "schedule": [
+      {
+        "date": "Mar 23, 2026",
+        "opponent": "Octorara Area Senior High School",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "4:00 PM"
+      },
+      {
+        "date": "Mar 23, 2026",
+        "opponent": "Octorara Area Senior High School",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "4:00 PM"
+      },
+      {
+        "date": "Apr 8, 2026",
+        "opponent": "Eastern Lebanon County",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "4:00 PM"
+      },
+      {
+        "date": "Apr 8, 2026",
+        "opponent": "Eastern Lebanon County",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "4:00 PM"
+      },
+      {
+        "date": "Apr 13, 2026",
+        "opponent": "Northern Lebanon HS/MS - Track & Field",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "4:00 PM"
+      },
+      {
+        "date": "Apr 13, 2026",
+        "opponent": "Northern Lebanon HS/MS",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "4:00 PM"
+      },
+      {
+        "date": "Apr 20, 2026",
+        "opponent": "Donegal High School",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "4:00 PM"
+      },
+      {
+        "date": "Apr 20, 2026",
+        "opponent": "Donegal High School",
+        "homeAway": "Home",
+        "eventType": "Varsity",
+        "time": "4:00 PM"
+      },
+      {
+        "date": "Apr 27, 2026",
+        "opponent": "Columbia High School/Columbia Middle School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "4:00 PM"
+      },
+      {
+        "date": "Apr 27, 2026",
+        "opponent": "Columbia High School/Columbia Middle School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "4:00 PM"
+      },
+      {
+        "date": "May 4, 2026",
+        "opponent": "Annville-Cleona High School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "4:00 PM"
+      },
+      {
+        "date": "May 4, 2026",
+        "opponent": "Annville-Cleona High School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "4:00 PM"
+      },
+      {
+        "date": "May 8, 2026",
+        "opponent": "Hempfield Senior High School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "4:00 PM"
+      },
+      {
+        "date": "May 8, 2026",
+        "opponent": "Hempfield Senior High School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "4:00 PM"
+      },
+      {
+        "date": "May 9, 2026",
+        "opponent": "Hempfield Senior High School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "10:00 AM"
+      },
+      {
+        "date": "May 9, 2026",
+        "opponent": "Hempfield Senior High School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "10:00 AM"
+      },
+      {
+        "date": "Mar 30, 2027",
+        "opponent": "Northern Lebanon HS/MS - Track & Field",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "4:00 PM"
+      },
+      {
+        "date": "Mar 30, 2027",
+        "opponent": "Northern Lebanon HS/MS",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "4:00 PM"
+      },
+      {
+        "date": "Apr 5, 2027",
+        "opponent": "Lancaster Mennonite School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "4:00 PM"
+      },
+      {
+        "date": "Apr 5, 2027",
+        "opponent": "Lancaster Mennonite School",
+        "homeAway": "Away",
+        "eventType": "Varsity",
+        "time": "4:00 PM"
+      }
+    ]
+  },
+  "girls-basketball": {
+    "schedule": [
+      {
+        "date": "Nov 28, 2025",
+        "opponent": "Penn Manor Girls Basketball Holiday Classic",
+        "homeAway": "Home",
+        "eventType": "",
+        "time": "5:00 PM"
+      },
+      {
+        "date": "Dec 5, 2025",
+        "opponent": "Cedar Crest Girls' Basketball",
+        "homeAway": "Home",
+        "eventType": "",
+        "time": "4:00 PM"
+      },
+      {
+        "date": "Dec 5, 2025",
+        "opponent": "Cedar Crest Girls' Basketball",
+        "homeAway": "Home",
+        "eventType": "",
+        "time": "6:00 PM"
+      }
+    ]
+  },
+  "girls-wrestling": {
+    "schedule": [
+      {
+        "date": "Jan 23, 2026",
+        "opponent": "LL League Girls Wrestling",
+        "homeAway": "Home",
+        "eventType": "League",
+        "time": "3:30 PM"
+      }
+    ]
+  },
+  "girls-soccer": {
+    "schedule": [],
+    "roster": [],
+    "image": "/girls-soccer-hero.jpeg"
   }
 }
