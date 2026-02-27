@@ -11,6 +11,24 @@ interface Settings {
   logo: string;
 }
 
+interface StaffMember {
+  id: string;
+  role: string;
+  name: string;
+  email: string;
+  photo: string;
+  photoPosition?: string;
+}
+
+interface Facility {
+  id: string;
+  name: string;
+  address: string;
+  description: string;
+  photo: string;
+  photoPosition?: string;
+}
+
 const DEFAULT_SETTINGS: Settings = {
   schoolName: "School Athletics",
   primaryColor: "#581C87",
@@ -18,10 +36,16 @@ const DEFAULT_SETTINGS: Settings = {
   logo: "",
 };
 
+const DEFAULT_STAFF: StaffMember[] = [
+  { id: "ad", role: "Athletic Director", name: "", email: "", photo: "" },
+  { id: "aad", role: "Assistant Athletic Director", name: "", email: "", photo: "" },
+  { id: "atad", role: "Assistant to the Athletic Director", name: "", email: "", photo: "" },
+];
+
 export default function AdminPage() {
   const router = useRouter();
   const [selectedSport, setSelectedSport] = useState("football");
-  const [uploadType, setUploadType] = useState<"schedule" | "roster" | "image" | "info" | "news">("schedule");
+  const [uploadType, setUploadType] = useState<"schedule" | "roster" | "image" | "info" | "news" | "staff" | "facilities" | "championships" | "individual-awards">("schedule");
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [settings, setSettings] = useState<Settings>(DEFAULT_SETTINGS);
@@ -38,6 +62,8 @@ export default function AdminPage() {
   // Sport info form fields
   const [headCoach, setHeadCoach] = useState("");
   const [coachEmail, setCoachEmail] = useState("");
+  const [coachPhoto, setCoachPhoto] = useState("");
+  const [coachPhotoPreview, setCoachPhotoPreview] = useState("");
   const [programDescription, setProgramDescription] = useState("");
   const [twitterUrl, setTwitterUrl] = useState("");
   const [instagramUrl, setInstagramUrl] = useState("");
@@ -51,6 +77,10 @@ export default function AdminPage() {
   const [newsImageFile, setNewsImageFile] = useState<File | null>(null);
   const [newsImagePreview, setNewsImagePreview] = useState("");
 
+  // About page content fields
+  const [staffMembers, setStaffMembers] = useState<StaffMember[]>(DEFAULT_STAFF);
+  const [facilities, setFacilities] = useState<Facility[]>([]);
+
   // Hero image upload with drag-to-position
   const [heroImageFile, setHeroImageFile] = useState<File | null>(null);
   const [heroImagePreview, setHeroImagePreview] = useState("");
@@ -58,6 +88,20 @@ export default function AdminPage() {
   const [isDraggingHero, setIsDraggingHero] = useState(false);
   const heroPreviewRef = useRef<HTMLDivElement>(null);
   const heroDragLast = useRef({ x: 0, y: 0 });
+
+  // Shared drag-to-position for staff / facility / coach photos
+  const [dragActive, setDragActive] = useState<string | null>(null);
+  const dragLastRef = useRef({ x: 0, y: 0 });
+  const previewRefs = useRef<Record<string, HTMLDivElement | null>>({});
+  const [staffPositions, setStaffPositions] = useState<Record<string, { x: number; y: number }>>({});
+  const [facilityPositions, setFacilityPositions] = useState<Record<string, { x: number; y: number }>>({});
+  const [coachPos, setCoachPos] = useState({ x: 50, y: 50 });
+
+  // Championships state
+  const [sportAchievements, setSportAchievements] = useState<{ id: string; title: string; years: string }[]>([]);
+  const [leagueEntries, setLeagueEntries] = useState("");
+  const [districtEntries, setDistrictEntries] = useState("");
+  const [stateEntries, setStateEntries] = useState("");
 
   const sports = [
     { value: "football", label: "Football" },
@@ -109,12 +153,23 @@ export default function AdminPage() {
           const d = result.data[selectedSport];
           setHeadCoach(d.coach || "");
           setCoachEmail(d.coachEmail || "");
+          setCoachPhoto(d.coachPhoto || "");
+          setCoachPhotoPreview(d.coachPhoto || "");
+          if (d.coachPhotoPosition) {
+            const parts = d.coachPhotoPosition.split(' ');
+            setCoachPos({ x: parseFloat(parts[0]) || 50, y: parseFloat(parts[1]) || 50 });
+          } else {
+            setCoachPos({ x: 50, y: 50 });
+          }
           setProgramDescription(d.description || "");
           setTwitterUrl(d.twitterUrl || "");
           setInstagramUrl(d.instagramUrl || "");
         } else {
           setHeadCoach("");
           setCoachEmail("");
+          setCoachPhoto("");
+          setCoachPhotoPreview("");
+          setCoachPos({ x: 50, y: 50 });
           setProgramDescription("");
           setTwitterUrl("");
           setInstagramUrl("");
@@ -123,6 +178,81 @@ export default function AdminPage() {
       .catch((error) => console.error('Error loading sport info:', error));
   }, [selectedSport, uploadType]);
 
+  useEffect(() => {
+    if (uploadType !== "staff") return;
+    fetch('/api/staff')
+      .then((r) => r.json())
+      .then((result) => {
+        const data = (result.success && Array.isArray(result.data) && result.data.length > 0)
+          ? result.data : DEFAULT_STAFF;
+        setStaffMembers(data);
+        const posMap: Record<string, { x: number; y: number }> = {};
+        for (const m of data) {
+          if (m.photoPosition) {
+            const parts = m.photoPosition.split(' ');
+            posMap[m.id] = { x: parseFloat(parts[0]) || 50, y: parseFloat(parts[1]) || 50 };
+          } else {
+            posMap[m.id] = { x: 50, y: 50 };
+          }
+        }
+        setStaffPositions(posMap);
+      })
+      .catch((error) => {
+        console.error('Error loading staff:', error);
+        setStaffMembers(DEFAULT_STAFF);
+      });
+  }, [uploadType]);
+
+  useEffect(() => {
+    if (uploadType !== "facilities") return;
+    fetch('/api/facilities')
+      .then((r) => r.json())
+      .then((result) => {
+        if (result.success && Array.isArray(result.data)) {
+          setFacilities(result.data);
+          const posMap: Record<string, { x: number; y: number }> = {};
+          for (const f of result.data) {
+            if (f.photoPosition) {
+              const parts = f.photoPosition.split(' ');
+              posMap[f.id] = { x: parseFloat(parts[0]) || 50, y: parseFloat(parts[1]) || 50 };
+            } else {
+              posMap[f.id] = { x: 50, y: 50 };
+            }
+          }
+          setFacilityPositions(posMap);
+        }
+      })
+      .catch((error) => console.error('Error loading facilities:', error));
+  }, [uploadType]);
+
+  useEffect(() => {
+    if (uploadType !== "championships") return;
+    fetch('/api/championships')
+      .then((r) => r.json())
+      .then((result) => {
+        if (result.success) {
+          const sport = result.data?.sports?.find((s: { slug: string }) => s.slug === selectedSport);
+          setSportAchievements(sport?.achievements || []);
+        }
+      })
+      .catch(() => {});
+  }, [selectedSport, uploadType]);
+
+  useEffect(() => {
+    if (uploadType !== "individual-awards") return;
+    fetch('/api/championships')
+      .then((r) => r.json())
+      .then((result) => {
+        if (result.success) {
+          const ind = result.data?.individual || {};
+          setLeagueEntries((ind.league || []).join('\n'));
+          setDistrictEntries((ind.district || []).join('\n'));
+          setStateEntries((ind.state || []).join('\n'));
+        }
+      })
+      .catch(() => {});
+  }, [uploadType]);
+
   const handleLogout = async () => {
     if (sessionRole === 'pageowner') {
       await fetch('/api/page-owner-auth', { method: 'DELETE' });
@@ -130,6 +260,184 @@ export default function AdminPage() {
       await fetch('/api/admin-auth', { method: 'DELETE' });
     }
     router.push('/admin-login');
+  };
+
+  const handleSaveChampionships = async () => {
+    setIsLoading(true);
+    setMessage("");
+    try {
+      const res = await fetch('/api/championships', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          action: 'sport',
+          slug: selectedSport,
+          label: sports.find((s) => s.value === selectedSport)?.label || selectedSport,
+          achievements: sportAchievements,
+        }),
+      });
+      const result = await res.json();
+      setMessage(result.success ? '✅ Championships saved.' : `❌ ${result.message}`);
+    } catch {
+      setMessage('❌ Error saving championships.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleSaveIndividualSection = async (section: 'league' | 'district' | 'state', text: string) => {
+    setIsLoading(true);
+    setMessage("");
+    try {
+      const entries = text.split('\n').map((l) => l.trim()).filter(Boolean);
+      const res = await fetch('/api/championships', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'individual', section, entries }),
+      });
+      const result = await res.json();
+      setMessage(result.success ? '✅ Individual awards saved.' : `❌ ${result.message}`);
+    } catch {
+      setMessage('❌ Error saving individual awards.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleStaffFieldChange = (id: string, field: "name" | "email", value: string) => {
+    setStaffMembers((prev) => prev.map((member) => (
+      member.id === id ? { ...member, [field]: value } : member
+    )));
+  };
+
+  const handleStaffPhotoUpload = async (id: string, file: File) => {
+    setIsLoading(true);
+    setMessage("");
+    const sizeWarning = await checkImageSize(file);
+    if (sizeWarning) { setMessage(sizeWarning); setIsLoading(false); return; }
+    try {
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('staffId', id);
+      const response = await fetch('/api/upload-staff-photo', { method: 'POST', body: formData });
+      const result = await response.json();
+      if (!result.success) {
+        setMessage(`Error uploading staff photo: ${result.message}`);
+        return;
+      }
+      setStaffMembers((prev) => prev.map((member) => (
+        member.id === id ? { ...member, photo: result.path || "" } : member
+      )));
+      setMessage("Staff photo uploaded. Click Save Staff to publish.");
+    } catch {
+      setMessage("Error uploading staff photo.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleSaveStaff = async () => {
+    setIsLoading(true);
+    setMessage("");
+    try {
+      const staffWithPos = staffMembers.map((m) => ({
+        ...m,
+        photoPosition: `${Math.round(staffPositions[m.id]?.x ?? 50)}% ${Math.round(staffPositions[m.id]?.y ?? 50)}%`,
+      }));
+      const response = await fetch('/api/staff', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ staff: staffWithPos }),
+      });
+      const result = await response.json();
+      setMessage(result.success ? "Staff section saved successfully." : `Error: ${result.message}`);
+    } catch {
+      setMessage("Error saving staff section.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const addFacility = () => {
+    const id = `facility-${Date.now()}`;
+    setFacilities((prev) => [...prev, { id, name: "", address: "", description: "", photo: "" }]);
+  };
+
+  const handleFacilityFieldChange = (id: string, field: "name" | "address" | "description", value: string) => {
+    setFacilities((prev) => prev.map((facility) => (
+      facility.id === id ? { ...facility, [field]: value } : facility
+    )));
+  };
+
+  const handleFacilityPhotoUpload = async (id: string, file: File) => {
+    setIsLoading(true);
+    setMessage("");
+    const sizeWarning = await checkImageSize(file);
+    if (sizeWarning) { setMessage(sizeWarning); setIsLoading(false); return; }
+    try {
+      const formData = new FormData();
+      formData.append('file', file);
+      const response = await fetch('/api/upload-facility-photo', { method: 'POST', body: formData });
+      const result = await response.json();
+      if (!result.success) {
+        setMessage(`Error uploading facility photo: ${result.message}`);
+        return;
+      }
+      setFacilities((prev) => prev.map((facility) => (
+        facility.id === id ? { ...facility, photo: result.path || "" } : facility
+      )));
+      setMessage("Facility photo uploaded. Click Save Facility to publish.");
+    } catch {
+      setMessage("Error uploading facility photo.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const saveFacility = async (facility: Facility) => {
+    setIsLoading(true);
+    setMessage("");
+    try {
+      const withPos = {
+        ...facility,
+        photoPosition: `${Math.round(facilityPositions[facility.id]?.x ?? 50)}% ${Math.round(facilityPositions[facility.id]?.y ?? 50)}%`,
+      };
+      const response = await fetch('/api/facilities', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'upsert', facility: withPos }),
+      });
+      const result = await response.json();
+      setMessage(result.success ? "Facility saved successfully." : `Error: ${result.message}`);
+    } catch {
+      setMessage("Error saving facility.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const deleteFacility = async (facility: Facility) => {
+    if (!facility.id) return;
+    setIsLoading(true);
+    setMessage("");
+    try {
+      const response = await fetch('/api/facilities', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'delete', facility: { id: facility.id } }),
+      });
+      const result = await response.json();
+      if (result.success) {
+        setFacilities((prev) => prev.filter((f) => f.id !== facility.id));
+        setMessage("Facility deleted.");
+      } else {
+        setMessage(`Error: ${result.message}`);
+      }
+    } catch {
+      setMessage("Error deleting facility.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   // ── Hero image handlers ──────────────────────────────────────────────────
@@ -192,6 +500,50 @@ export default function AdminPage() {
     }));
   };
 
+  // ── Image dimension check ────────────────────────────────────────────────
+
+  const checkImageSize = (file: File, minPx = 300): Promise<string | null> =>
+    new Promise((resolve) => {
+      const url = URL.createObjectURL(file);
+      const img = new Image();
+      img.onload = () => {
+        URL.revokeObjectURL(url);
+        if (img.naturalWidth < minPx || img.naturalHeight < minPx) {
+          resolve(`⚠️ This image is only ${img.naturalWidth}×${img.naturalHeight}px. Photos smaller than ${minPx}px will appear blurry. Please upload a higher-resolution photo.`);
+        } else {
+          resolve(null);
+        }
+      };
+      img.onerror = () => { URL.revokeObjectURL(url); resolve(null); };
+      img.src = url;
+    });
+
+  // ── Shared photo drag handlers (staff / facility / coach) ────────────────
+
+  const startPhotoDrag = (clientX: number, clientY: number, id: string) => {
+    setDragActive(id);
+    dragLastRef.current = { x: clientX, y: clientY };
+  };
+
+  const movePhotoDrag = (
+    clientX: number,
+    clientY: number,
+    id: string,
+    setter: (fn: (prev: { x: number; y: number }) => { x: number; y: number }) => void
+  ) => {
+    if (dragActive !== id) return;
+    const el = previewRefs.current[id];
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const dx = clientX - dragLastRef.current.x;
+    const dy = clientY - dragLastRef.current.y;
+    dragLastRef.current = { x: clientX, y: clientY };
+    setter((prev) => ({
+      x: Math.max(0, Math.min(100, prev.x - (dx / rect.width) * 100)),
+      y: Math.max(0, Math.min(100, prev.y - (dy / rect.height) * 100)),
+    }));
+  };
+
   // ─────────────────────────────────────────────────────────────────────────
 
   const handleSportInfoSubmit = async () => {
@@ -205,7 +557,15 @@ export default function AdminPage() {
         body: JSON.stringify({
           sport: selectedSport,
           type: 'info',
-          data: { coach: headCoach, coachEmail, description: programDescription, twitterUrl, instagramUrl },
+          data: {
+            coach: headCoach,
+            coachEmail,
+            coachPhoto,
+            coachPhotoPosition: `${Math.round(coachPos.x)}% ${Math.round(coachPos.y)}%`,
+            description: programDescription,
+            twitterUrl,
+            instagramUrl,
+          },
         }),
       });
 
@@ -216,6 +576,31 @@ export default function AdminPage() {
       );
     } catch {
       setMessage(`❌ Error updating sport information.`);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleCoachPhotoUpload = async (file: File) => {
+    setIsLoading(true);
+    setMessage("");
+    const sizeWarning = await checkImageSize(file);
+    if (sizeWarning) { setMessage(sizeWarning); setIsLoading(false); return; }
+    try {
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('sport', selectedSport);
+      const response = await fetch('/api/upload-coach-photo', { method: 'POST', body: formData });
+      const result = await response.json();
+      if (!result.success) {
+        setMessage(`Error uploading coach photo: ${result.message}`);
+        return;
+      }
+      setCoachPhoto(result.path || "");
+      setCoachPhotoPreview(result.path || "");
+      setMessage("Coach photo uploaded. Click Save Sport Information to publish.");
+    } catch {
+      setMessage("Error uploading coach photo.");
     } finally {
       setIsLoading(false);
     }
@@ -393,8 +778,15 @@ export default function AdminPage() {
     roster: "Roster",
     image: "Image",
     info: "Info",
+    championships: "Champ.",
     news: "News",
+    staff: "Staff",
+    facilities: "Facilities",
+    "individual-awards": "Ind. Awards",
   };
+  const availableUploadTypes = isPageOwner
+    ? (["schedule", "roster", "image", "info", "championships", "news"] as const)
+    : (["schedule", "roster", "image", "info", "championships", "news", "staff", "facilities", "individual-awards"] as const);
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -432,8 +824,8 @@ export default function AdminPage() {
         <div className="max-w-2xl mx-auto bg-white rounded-lg shadow-lg p-8">
           <h1 className="text-3xl font-bold mb-8 text-gray-800">Update Sports Information</h1>
 
-          {/* Sport Selection — hidden when writing news */}
-          {uploadType !== "news" && (
+          {/* Sport Selection - hidden for non-sport tabs */}
+          {!["news", "staff", "facilities", "individual-awards"].includes(uploadType) && (
             <div className="mb-6">
               <label className="block text-lg font-semibold mb-2 text-gray-700">Select Sport</label>
               {isPageOwner ? (
@@ -458,8 +850,8 @@ export default function AdminPage() {
           {/* Tab Selection */}
           <div className="mb-6">
             <label className="block text-lg font-semibold mb-2 text-gray-700">Update Type</label>
-            <div className="grid grid-cols-3 md:grid-cols-5 gap-2">
-              {(["schedule", "roster", "image", "info", "news"] as const).map((type) => (
+            <div className="grid grid-cols-3 md:grid-cols-7 gap-2">
+              {availableUploadTypes.map((type) => (
                 <button
                   key={type}
                   onClick={() => { setUploadType(type); setMessage(""); }}
@@ -568,6 +960,7 @@ export default function AdminPage() {
                     isLoading ? "opacity-50 cursor-not-allowed" : ""
                   }`}
                 />
+                <p className="text-xs text-gray-500 mt-1">Best: 1200×675 px (16:9 landscape) · JPG, PNG, or WEBP · max 5 MB</p>
                 {newsImagePreview && (
                   <div className="mt-3 relative inline-block">
                     <img
@@ -584,7 +977,6 @@ export default function AdminPage() {
                     </button>
                   </div>
                 )}
-                <p className="text-xs text-gray-500 mt-1">JPG, PNG, or WEBP · Max 5MB</p>
               </div>
 
               {/* Body */}
@@ -648,6 +1040,61 @@ export default function AdminPage() {
                   disabled={isLoading}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg text-gray-800"
                 />
+              </div>
+
+              <div>
+                <label className="block text-lg font-semibold mb-2 text-gray-700">Coach Photo</label>
+                <input
+                  type="file"
+                  accept="image/jpeg,image/jpg,image/png,image/webp"
+                  disabled={isLoading}
+                  onChange={(e) => {
+                    const file = e.target.files?.[0];
+                    if (file) handleCoachPhotoUpload(file);
+                  }}
+                  className={`w-full px-4 py-3 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-gray-400 transition ${
+                    isLoading ? "opacity-50 cursor-not-allowed" : ""
+                  }`}
+                />
+                <p className="text-xs text-gray-500 mt-1">Best: 800×800 px (square or portrait) · JPG, PNG, or WEBP · max 5 MB</p>
+                {coachPhotoPreview && (
+                  <div className="mt-3">
+                    <p className="text-xs text-gray-500 mb-1">Drag to adjust crop position:</p>
+                    <div
+                      ref={(el) => { previewRefs.current['__coach__'] = el; }}
+                      className="relative overflow-hidden rounded-lg select-none"
+                      style={{ aspectRatio: '3/2', cursor: dragActive === '__coach__' ? 'grabbing' : 'grab', transform: 'translateZ(0)' }}
+                      onMouseDown={(e) => { startPhotoDrag(e.clientX, e.clientY, '__coach__'); e.preventDefault(); }}
+                      onMouseMove={(e) => {
+                        if (dragActive === '__coach__') {
+                          movePhotoDrag(e.clientX, e.clientY, '__coach__', (fn) => setCoachPos(fn));
+                        }
+                      }}
+                      onMouseUp={() => setDragActive(null)}
+                      onMouseLeave={() => setDragActive(null)}
+                      onTouchStart={(e) => { const t = e.touches[0]; startPhotoDrag(t.clientX, t.clientY, '__coach__'); }}
+                      onTouchMove={(e) => {
+                        const t = e.touches[0];
+                        movePhotoDrag(t.clientX, t.clientY, '__coach__', (fn) => setCoachPos(fn));
+                      }}
+                      onTouchEnd={() => setDragActive(null)}
+                    >
+                      <img
+                        src={coachPhotoPreview}
+                        alt="Coach"
+                        draggable={false}
+                        className="absolute inset-0 w-full h-full pointer-events-none"
+                        style={{ objectFit: 'cover', objectPosition: `${coachPos.x}% ${coachPos.y}%` }}
+                      />
+                      <div className="absolute bottom-2 right-2 bg-black/50 text-white text-xs px-2 py-1 rounded pointer-events-none">
+                        ⤡ Drag to reposition
+                      </div>
+                    </div>
+                    <p className="text-xs text-gray-400 mt-1">
+                      Position: {Math.round(coachPos.x)}% h · {Math.round(coachPos.y)}% v
+                    </p>
+                  </div>
+                )}
               </div>
 
               <div>
@@ -872,6 +1319,348 @@ export default function AdminPage() {
             </div>
           )}
 
+          {/* Staff section editor */}
+          {uploadType === "staff" && (
+            <div className="space-y-6">
+              <div className="p-4 bg-gray-50 border-l-4 rounded" style={{ borderColor: settings.primaryColor }}>
+                <h3 className="font-semibold mb-2" style={{ color: settings.primaryColor }}>Athletics Staff</h3>
+                <p className="text-sm text-gray-700">
+                  Update names, emails, and photos for the About page leadership cards.
+                </p>
+              </div>
+
+              {staffMembers.map((member) => (
+                <div key={member.id} className="border border-gray-200 rounded-lg p-4 space-y-4">
+                  <p className="font-semibold text-gray-800">{member.role}</p>
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-semibold mb-1 text-gray-700">Name</label>
+                      <input
+                        type="text"
+                        value={member.name}
+                        onChange={(e) => handleStaffFieldChange(member.id, "name", e.target.value)}
+                        disabled={isLoading}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg text-gray-800"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-semibold mb-1 text-gray-700">Email</label>
+                      <input
+                        type="email"
+                        value={member.email}
+                        onChange={(e) => handleStaffFieldChange(member.id, "email", e.target.value)}
+                        disabled={isLoading}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg text-gray-800"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-semibold mb-1 text-gray-700">Photo</label>
+                    <input
+                      type="file"
+                      accept="image/jpeg,image/jpg,image/png,image/webp"
+                      disabled={isLoading}
+                      onChange={(e) => {
+                        const file = e.target.files?.[0];
+                        if (file) handleStaffPhotoUpload(member.id, file);
+                      }}
+                      className={`w-full px-4 py-3 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-gray-400 transition ${
+                        isLoading ? "opacity-50 cursor-not-allowed" : ""
+                      }`}
+                    />
+                    <p className="text-xs text-gray-500 mt-1">Best: 800×800 px (square or portrait) · JPG, PNG, or WEBP · max 5 MB</p>
+                    {member.photo && (
+                      <div className="mt-3">
+                        <p className="text-xs text-gray-500 mb-1">Drag to adjust crop position:</p>
+                        <div
+                          ref={(el) => { previewRefs.current[member.id] = el; }}
+                          className="relative overflow-hidden rounded-lg select-none"
+                          style={{ aspectRatio: '16/10', cursor: dragActive === member.id ? 'grabbing' : 'grab', transform: 'translateZ(0)' }}
+                          onMouseDown={(e) => { startPhotoDrag(e.clientX, e.clientY, member.id); e.preventDefault(); }}
+                          onMouseMove={(e) => {
+                            if (dragActive === member.id) {
+                              movePhotoDrag(e.clientX, e.clientY, member.id, (fn) =>
+                                setStaffPositions((prev) => ({ ...prev, [member.id]: fn(prev[member.id] ?? { x: 50, y: 50 }) }))
+                              );
+                            }
+                          }}
+                          onMouseUp={() => setDragActive(null)}
+                          onMouseLeave={() => setDragActive(null)}
+                          onTouchStart={(e) => { const t = e.touches[0]; startPhotoDrag(t.clientX, t.clientY, member.id); }}
+                          onTouchMove={(e) => {
+                            const t = e.touches[0];
+                            movePhotoDrag(t.clientX, t.clientY, member.id, (fn) =>
+                              setStaffPositions((prev) => ({ ...prev, [member.id]: fn(prev[member.id] ?? { x: 50, y: 50 }) }))
+                            );
+                          }}
+                          onTouchEnd={() => setDragActive(null)}
+                        >
+                          <img
+                            src={member.photo}
+                            alt={member.name || member.role}
+                            draggable={false}
+                            className="absolute inset-0 w-full h-full pointer-events-none"
+                            style={{ objectFit: 'cover', objectPosition: `${staffPositions[member.id]?.x ?? 50}% ${staffPositions[member.id]?.y ?? 50}%` }}
+                          />
+                          <div className="absolute bottom-2 right-2 bg-black/50 text-white text-xs px-2 py-1 rounded pointer-events-none">
+                            ⤡ Drag to reposition
+                          </div>
+                        </div>
+                        <p className="text-xs text-gray-400 mt-1">
+                          Position: {Math.round(staffPositions[member.id]?.x ?? 50)}% h · {Math.round(staffPositions[member.id]?.y ?? 50)}% v
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              ))}
+
+              <button
+                onClick={handleSaveStaff}
+                disabled={isLoading}
+                className={`w-full py-4 px-6 rounded-lg font-bold text-lg text-white transition ${
+                  isLoading ? "bg-gray-400 cursor-not-allowed" : "hover:opacity-90"
+                }`}
+                style={!isLoading ? { backgroundColor: settings.primaryColor } : undefined}
+              >
+                {isLoading ? "Saving..." : "Save Staff"}
+              </button>
+            </div>
+          )}
+
+          {/* Facilities section editor */}
+          {uploadType === "facilities" && (
+            <div className="space-y-6">
+              <div className="p-4 bg-gray-50 border-l-4 rounded" style={{ borderColor: settings.primaryColor }}>
+                <h3 className="font-semibold mb-2" style={{ color: settings.primaryColor }}>Facilities</h3>
+                <p className="text-sm text-gray-700">
+                  Add or edit facility name, address, photo, and description/history shown on About page.
+                </p>
+              </div>
+
+              <button
+                onClick={addFacility}
+                disabled={isLoading}
+                className={`w-full py-3 px-4 rounded-lg font-semibold border-2 transition ${
+                  isLoading ? "opacity-50 cursor-not-allowed border-gray-300 text-gray-400" : "hover:opacity-80"
+                }`}
+                style={!isLoading ? { borderColor: settings.primaryColor, color: settings.primaryColor } : undefined}
+              >
+                Add Facility
+              </button>
+
+              {facilities.map((facility) => (
+                <div key={facility.id} className="border border-gray-200 rounded-lg p-4 space-y-4">
+                  <div>
+                    <label className="block text-sm font-semibold mb-1 text-gray-700">Facility Name</label>
+                    <input
+                      type="text"
+                      value={facility.name}
+                      onChange={(e) => handleFacilityFieldChange(facility.id, "name", e.target.value)}
+                      disabled={isLoading}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg text-gray-800"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-semibold mb-1 text-gray-700">Address</label>
+                    <input
+                      type="text"
+                      value={facility.address}
+                      onChange={(e) => handleFacilityFieldChange(facility.id, "address", e.target.value)}
+                      disabled={isLoading}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg text-gray-800"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-semibold mb-1 text-gray-700">Description / History</label>
+                    <textarea
+                      value={facility.description}
+                      onChange={(e) => handleFacilityFieldChange(facility.id, "description", e.target.value)}
+                      rows={5}
+                      disabled={isLoading}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg text-gray-800"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-semibold mb-1 text-gray-700">Photo</label>
+                    <input
+                      type="file"
+                      accept="image/jpeg,image/jpg,image/png,image/webp"
+                      disabled={isLoading}
+                      onChange={(e) => {
+                        const file = e.target.files?.[0];
+                        if (file) handleFacilityPhotoUpload(facility.id, file);
+                      }}
+                      className={`w-full px-4 py-3 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-gray-400 transition ${
+                        isLoading ? "opacity-50 cursor-not-allowed" : ""
+                      }`}
+                    />
+                    <p className="text-xs text-gray-500 mt-1">Best: 1200×900 px (landscape) · JPG, PNG, or WEBP · max 5 MB</p>
+                    {facility.photo && (
+                      <div className="mt-3">
+                        <p className="text-xs text-gray-500 mb-1">Drag to adjust crop position:</p>
+                        <div
+                          ref={(el) => { previewRefs.current[facility.id] = el; }}
+                          className="relative overflow-hidden rounded-lg select-none"
+                          style={{ aspectRatio: '4/3', cursor: dragActive === facility.id ? 'grabbing' : 'grab', transform: 'translateZ(0)' }}
+                          onMouseDown={(e) => { startPhotoDrag(e.clientX, e.clientY, facility.id); e.preventDefault(); }}
+                          onMouseMove={(e) => {
+                            if (dragActive === facility.id) {
+                              movePhotoDrag(e.clientX, e.clientY, facility.id, (fn) =>
+                                setFacilityPositions((prev) => ({ ...prev, [facility.id]: fn(prev[facility.id] ?? { x: 50, y: 50 }) }))
+                              );
+                            }
+                          }}
+                          onMouseUp={() => setDragActive(null)}
+                          onMouseLeave={() => setDragActive(null)}
+                          onTouchStart={(e) => { const t = e.touches[0]; startPhotoDrag(t.clientX, t.clientY, facility.id); }}
+                          onTouchMove={(e) => {
+                            const t = e.touches[0];
+                            movePhotoDrag(t.clientX, t.clientY, facility.id, (fn) =>
+                              setFacilityPositions((prev) => ({ ...prev, [facility.id]: fn(prev[facility.id] ?? { x: 50, y: 50 }) }))
+                            );
+                          }}
+                          onTouchEnd={() => setDragActive(null)}
+                        >
+                          <img
+                            src={facility.photo}
+                            alt={facility.name || "Facility"}
+                            draggable={false}
+                            className="absolute inset-0 w-full h-full pointer-events-none"
+                            style={{ objectFit: 'cover', objectPosition: `${facilityPositions[facility.id]?.x ?? 50}% ${facilityPositions[facility.id]?.y ?? 50}%` }}
+                          />
+                          <div className="absolute bottom-2 right-2 bg-black/50 text-white text-xs px-2 py-1 rounded pointer-events-none">
+                            ⤡ Drag to reposition
+                          </div>
+                        </div>
+                        <p className="text-xs text-gray-400 mt-1">
+                          Position: {Math.round(facilityPositions[facility.id]?.x ?? 50)}% h · {Math.round(facilityPositions[facility.id]?.y ?? 50)}% v
+                        </p>
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <button
+                      onClick={() => saveFacility(facility)}
+                      disabled={isLoading}
+                      className={`py-3 px-4 rounded-lg font-semibold text-white transition ${
+                        isLoading ? "bg-gray-400 cursor-not-allowed" : "hover:opacity-90"
+                      }`}
+                      style={!isLoading ? { backgroundColor: settings.primaryColor } : undefined}
+                    >
+                      Save Facility
+                    </button>
+                    <button
+                      onClick={() => deleteFacility(facility)}
+                      disabled={isLoading}
+                      className={`py-3 px-4 rounded-lg font-semibold border-2 transition ${
+                        isLoading ? "opacity-50 cursor-not-allowed border-gray-300 text-gray-400" : "border-red-500 text-red-600 hover:bg-red-50"
+                      }`}
+                    >
+                      Delete Facility
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* ── Championships Tab ─────────────────────────────────────── */}
+          {uploadType === "championships" && (
+            <div className="space-y-4">
+              <div className="p-4 bg-gray-50 border-l-4 rounded" style={{ borderColor: settings.primaryColor }}>
+                <h3 className="font-semibold mb-1" style={{ color: settings.primaryColor }}>
+                  Team Championships — {sports.find((s) => s.value === selectedSport)?.label || selectedSport}
+                </h3>
+                <p className="text-sm text-gray-600">Add or edit championship titles and the years won. Each row is one category.</p>
+              </div>
+
+              {sportAchievements.map((ach, idx) => (
+                <div key={ach.id} className="flex gap-2 items-start">
+                  <div className="flex-1">
+                    <input
+                      type="text"
+                      value={ach.title}
+                      onChange={(e) => setSportAchievements((prev) => prev.map((a, i) => i === idx ? { ...a, title: e.target.value } : a))}
+                      placeholder="e.g. Section Champions"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm text-gray-800 mb-1"
+                    />
+                    <input
+                      type="text"
+                      value={ach.years}
+                      onChange={(e) => setSportAchievements((prev) => prev.map((a, i) => i === idx ? { ...a, years: e.target.value } : a))}
+                      placeholder="e.g. 2018, 2019, 2022"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm text-gray-800"
+                    />
+                  </div>
+                  <button
+                    onClick={() => setSportAchievements((prev) => prev.filter((_, i) => i !== idx))}
+                    className="mt-1 p-2 text-red-500 hover:text-red-700 hover:bg-red-50 rounded transition"
+                    title="Remove"
+                  >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
+                </div>
+              ))}
+
+              <button
+                onClick={() => setSportAchievements((prev) => [...prev, { id: String(Date.now()), title: "", years: "" }])}
+                className="w-full py-2 border-2 border-dashed border-gray-300 rounded-lg text-gray-500 hover:border-gray-400 hover:text-gray-600 transition text-sm"
+              >
+                + Add Achievement
+              </button>
+
+              <button
+                onClick={handleSaveChampionships}
+                disabled={isLoading}
+                className={`w-full py-3 rounded-lg font-semibold text-white transition ${isLoading ? "bg-gray-400 cursor-not-allowed" : "hover:opacity-90"}`}
+                style={!isLoading ? { backgroundColor: settings.primaryColor } : undefined}
+              >
+                Save Championships
+              </button>
+            </div>
+          )}
+
+          {/* ── Individual Awards Tab ──────────────────────────────────── */}
+          {uploadType === "individual-awards" && (
+            <div className="space-y-6">
+              <div className="p-4 bg-gray-50 border-l-4 rounded" style={{ borderColor: settings.primaryColor }}>
+                <h3 className="font-semibold mb-1" style={{ color: settings.primaryColor }}>Individual Accomplishments</h3>
+                <p className="text-sm text-gray-600">One entry per line. Each section saves independently.</p>
+              </div>
+
+              {([
+                { key: "league" as const, label: "League Champions", value: leagueEntries, setter: setLeagueEntries },
+                { key: "district" as const, label: "District Champions", value: districtEntries, setter: setDistrictEntries },
+                { key: "state" as const, label: "PIAA State Champions", value: stateEntries, setter: setStateEntries },
+              ]).map(({ key, label, value, setter }) => (
+                <div key={key}>
+                  <label className="block font-semibold text-gray-700 mb-2">{label}</label>
+                  <textarea
+                    value={value}
+                    onChange={(e) => setter(e.target.value)}
+                    rows={8}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm text-gray-800 font-mono resize-y"
+                    placeholder={"e.g. 2024 - Swimming - Jane Doe - 100 Butterfly"}
+                  />
+                  <button
+                    onClick={() => handleSaveIndividualSection(key, value)}
+                    disabled={isLoading}
+                    className={`mt-2 w-full py-2 rounded-lg font-semibold text-white transition text-sm ${isLoading ? "bg-gray-400 cursor-not-allowed" : "hover:opacity-90"}`}
+                    style={!isLoading ? { backgroundColor: settings.primaryColor } : undefined}
+                  >
+                    Save {label}
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
+
           {/* Loading Indicator */}
           {isLoading && (
             <div className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg text-blue-800 flex items-center gap-3">
@@ -879,7 +1668,21 @@ export default function AdminPage() {
                 <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                 <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
               </svg>
-              {uploadType === "news" ? "Publishing article..." : uploadType === "image" ? "Uploading image..." : uploadType === "info" ? "Saving information..." : "Processing and saving..."}
+              {uploadType === "news"
+                ? "Publishing article..."
+                : uploadType === "image"
+                  ? "Uploading image..."
+                  : uploadType === "info"
+                    ? "Saving information..."
+                    : uploadType === "staff"
+                      ? "Saving staff..."
+                      : uploadType === "facilities"
+                        ? "Saving facilities..."
+                        : uploadType === "championships"
+                          ? "Saving championships..."
+                          : uploadType === "individual-awards"
+                            ? "Saving individual awards..."
+                            : "Processing and saving..."}
             </div>
           )}
 

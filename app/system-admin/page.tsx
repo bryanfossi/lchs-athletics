@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { allSports } from "../components/SiteHeader";
@@ -25,6 +25,28 @@ export default function SystemAdminPage() {
     { id: '4', title: 'All-State Players', value: '47', icon: 'star' },
   ]);
 
+  // Home hero images
+  const [heroImages, setHeroImages] = useState<Array<{ path: string; position: string }>>([]);
+  const [homeHeroFile, setHomeHeroFile] = useState<File | null>(null);
+  const [homeHeroPreview, setHomeHeroPreview] = useState("");
+  const [homeHeroPos, setHomeHeroPos] = useState({ x: 50, y: 30 });
+  const [isDraggingHomeHero, setIsDraggingHomeHero] = useState(false);
+  const [homeHeroLoading, setHomeHeroLoading] = useState(false);
+  const [homeHeroMsg, setHomeHeroMsg] = useState("");
+  const homeHeroPreviewRef = useRef<HTMLDivElement>(null);
+  const homeHeroDragLast = useRef({ x: 0, y: 0 });
+
+  // Championship hero images
+  const [champHeroImages, setChampHeroImages] = useState<Array<{ path: string; position: string }>>([]);
+  const [champHeroFile, setChampHeroFile] = useState<File | null>(null);
+  const [champHeroPreview, setChampHeroPreview] = useState("");
+  const [champHeroPos, setChampHeroPos] = useState({ x: 50, y: 30 });
+  const [isDraggingChampHero, setIsDraggingChampHero] = useState(false);
+  const [champHeroLoading, setChampHeroLoading] = useState(false);
+  const [champHeroMsg, setChampHeroMsg] = useState("");
+  const champHeroPreviewRef = useRef<HTMLDivElement>(null);
+  const champHeroDragLast = useRef({ x: 0, y: 0 });
+
   // iCal Schedule Import state
   const [icalUrl, setIcalUrl] = useState("");
   const [timezone, setTimezone] = useState("America/New_York");
@@ -48,13 +70,15 @@ export default function SystemAdminPage() {
   useEffect(() => {
     const loadSettings = async () => {
       try {
-        const [settingsRes, ownersRes] = await Promise.all([
+        const [settingsRes, ownersRes, champsRes] = await Promise.all([
           fetch('/api/settings'),
           fetch('/api/page-owners'),
+          fetch('/api/championships'),
         ]);
-        const [settingsResult, ownersResult] = await Promise.all([
+        const [settingsResult, ownersResult, champsResult] = await Promise.all([
           settingsRes.json(),
           ownersRes.json(),
+          champsRes.json(),
         ]);
 
         if (settingsResult.success && settingsResult.data) {
@@ -71,10 +95,17 @@ export default function SystemAdminPage() {
           if (Array.isArray(settingsResult.data.stats)) {
             setStats(settingsResult.data.stats);
           }
+          if (Array.isArray(settingsResult.data.heroImages)) {
+            setHeroImages(settingsResult.data.heroImages);
+          }
         }
 
         if (ownersResult.success) {
           setSportsWithOwners(ownersResult.sports || []);
+        }
+
+        if (champsResult.success && Array.isArray(champsResult.data?.heroImages)) {
+          setChampHeroImages(champsResult.data.heroImages);
         }
       } catch (error) {
         console.error('Error loading settings:', error);
@@ -139,6 +170,7 @@ export default function SystemAdminPage() {
           timezone,
           theme,
           stats,
+          heroImages,
         }),
       });
 
@@ -212,6 +244,148 @@ export default function SystemAdminPage() {
       setPageOwnerLoading(false);
     }
   };
+
+  // ── Home hero image handlers ───────────────────────────────────────────────
+
+  const handleHomeHeroSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setHomeHeroFile(file);
+    setHomeHeroPreview(URL.createObjectURL(file));
+    setHomeHeroPos({ x: 50, y: 30 });
+    setHomeHeroMsg("");
+  };
+
+  const startHomeHeroDrag = (clientX: number, clientY: number) => {
+    setIsDraggingHomeHero(true);
+    homeHeroDragLast.current = { x: clientX, y: clientY };
+  };
+
+  const moveHomeHeroDrag = (clientX: number, clientY: number) => {
+    if (!homeHeroPreviewRef.current) return;
+    const rect = homeHeroPreviewRef.current.getBoundingClientRect();
+    const dx = clientX - homeHeroDragLast.current.x;
+    const dy = clientY - homeHeroDragLast.current.y;
+    homeHeroDragLast.current = { x: clientX, y: clientY };
+    setHomeHeroPos(prev => ({
+      x: Math.max(0, Math.min(100, prev.x - (dx / rect.width) * 100)),
+      y: Math.max(0, Math.min(100, prev.y - (dy / rect.height) * 100)),
+    }));
+  };
+
+  const handleHomeHeroUpload = async () => {
+    if (!homeHeroFile) return;
+    setHomeHeroLoading(true);
+    setHomeHeroMsg("");
+    try {
+      const formData = new FormData();
+      formData.append('file', homeHeroFile);
+      formData.append('posX', String(Math.round(homeHeroPos.x)));
+      formData.append('posY', String(Math.round(homeHeroPos.y)));
+      const res = await fetch('/api/home-hero', { method: 'POST', body: formData });
+      const result = await res.json();
+      if (result.success) {
+        setHeroImages(result.heroImages);
+        setHomeHeroFile(null);
+        setHomeHeroPreview("");
+        setHomeHeroMsg("✅ Photo added to the home page hero carousel.");
+      } else {
+        setHomeHeroMsg(`❌ ${result.message}`);
+      }
+    } catch {
+      setHomeHeroMsg("❌ Error uploading image.");
+    } finally {
+      setHomeHeroLoading(false);
+    }
+  };
+
+  const handleRemoveHomeHero = async (imagePath: string) => {
+    try {
+      const res = await fetch('/api/home-hero', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ imagePath }),
+      });
+      const result = await res.json();
+      if (result.success) {
+        setHeroImages(result.heroImages);
+      }
+    } catch {
+      // silently fail
+    }
+  };
+
+  // ── Championship hero image handlers ──────────────────────────────────────
+
+  const handleChampHeroSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setChampHeroFile(file);
+    setChampHeroPreview(URL.createObjectURL(file));
+    setChampHeroPos({ x: 50, y: 30 });
+    setChampHeroMsg("");
+  };
+
+  const startChampHeroDrag = (clientX: number, clientY: number) => {
+    setIsDraggingChampHero(true);
+    champHeroDragLast.current = { x: clientX, y: clientY };
+  };
+
+  const moveChampHeroDrag = (clientX: number, clientY: number) => {
+    if (!champHeroPreviewRef.current) return;
+    const rect = champHeroPreviewRef.current.getBoundingClientRect();
+    const dx = clientX - champHeroDragLast.current.x;
+    const dy = clientY - champHeroDragLast.current.y;
+    champHeroDragLast.current = { x: clientX, y: clientY };
+    setChampHeroPos(prev => ({
+      x: Math.max(0, Math.min(100, prev.x - (dx / rect.width) * 100)),
+      y: Math.max(0, Math.min(100, prev.y - (dy / rect.height) * 100)),
+    }));
+  };
+
+  const handleChampHeroUpload = async () => {
+    if (!champHeroFile) return;
+    setChampHeroLoading(true);
+    setChampHeroMsg("");
+    try {
+      const formData = new FormData();
+      formData.append('file', champHeroFile);
+      formData.append('posX', String(Math.round(champHeroPos.x)));
+      formData.append('posY', String(Math.round(champHeroPos.y)));
+      const res = await fetch('/api/championship-hero', { method: 'POST', body: formData });
+      const result = await res.json();
+      if (result.success) {
+        setChampHeroImages(result.heroImages);
+        setChampHeroFile(null);
+        setChampHeroPreview("");
+        setChampHeroMsg("✅ Photo added to the championships hero carousel.");
+      } else {
+        setChampHeroMsg(`❌ ${result.message}`);
+      }
+    } catch {
+      setChampHeroMsg("❌ Error uploading image.");
+    } finally {
+      setChampHeroLoading(false);
+    }
+  };
+
+  const handleRemoveChampHero = async (imagePath: string) => {
+    try {
+      const res = await fetch('/api/championship-hero', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ imagePath }),
+      });
+      const result = await res.json();
+      if (result.success) {
+        setChampHeroImages(result.heroImages);
+      }
+    } catch {
+      // silently fail
+    }
+  };
+
+  // ─────────────────────────────────────────────────────────────────────────
 
   const handleImportIcal = async () => {
     if (!icalUrl.trim()) {
@@ -884,6 +1058,226 @@ export default function SystemAdminPage() {
             <p className="text-sm text-gray-400 mt-4">
               Tip: values like <code className="bg-gray-100 px-1 rounded">47+</code> or <code className="bg-gray-100 px-1 rounded">3×</code> work — the number counts up and the suffix stays fixed.
             </p>
+          </div>
+
+          {/* Home Hero Images Card */}
+          <div className="bg-white rounded-lg shadow-lg p-8">
+            <h2 className="text-2xl font-bold mb-2 text-gray-800">Home Page Hero Images</h2>
+            <p className="text-gray-600 mb-6">
+              Upload photos that rotate in the full-width banner at the top of the home page. Drag the preview to set the crop position before uploading.
+            </p>
+
+            {/* Existing images */}
+            {heroImages.length > 0 && (
+              <div className="mb-6 space-y-3">
+                <p className="text-sm font-semibold text-gray-500 uppercase tracking-wide">
+                  Current Hero Photos ({heroImages.length})
+                </p>
+                <div className="grid sm:grid-cols-2 gap-3">
+                  {heroImages.map((img) => (
+                    <div key={img.path} className="relative rounded-lg overflow-hidden border border-gray-200 group" style={{ height: '120px' }}>
+                      <img
+                        src={img.path}
+                        alt=""
+                        className="w-full h-full object-cover"
+                        style={{ objectPosition: img.position }}
+                      />
+                      <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                        <button
+                          onClick={() => handleRemoveHomeHero(img.path)}
+                          className="bg-red-500 hover:bg-red-600 text-white text-xs font-bold px-3 py-1.5 rounded transition"
+                        >
+                          Remove
+                        </button>
+                      </div>
+                      <div className="absolute bottom-1 left-2 text-white text-xs bg-black/50 px-1.5 py-0.5 rounded pointer-events-none">
+                        {img.position}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Upload new */}
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-semibold mb-2 text-gray-700">Select Image</label>
+                <input
+                  type="file"
+                  accept="image/jpeg,image/jpg,image/png,image/webp"
+                  onChange={handleHomeHeroSelect}
+                  disabled={homeHeroLoading}
+                  className={`w-full px-4 py-3 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-gray-400 transition ${homeHeroLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
+                />
+                <p className="text-xs text-gray-500 mt-1">Recommended: 1920×600 px or wider · JPG, PNG, or WEBP · max 5 MB</p>
+              </div>
+
+              {/* Drag-to-position preview */}
+              {homeHeroPreview && (
+                <div>
+                  <p className="text-sm font-semibold text-gray-600 mb-2">Drag to adjust the crop position:</p>
+                  <div
+                    ref={homeHeroPreviewRef}
+                    className="relative overflow-hidden rounded-lg select-none"
+                    style={{ height: '200px', cursor: isDraggingHomeHero ? 'grabbing' : 'grab' }}
+                    onMouseDown={(e) => { startHomeHeroDrag(e.clientX, e.clientY); e.preventDefault(); }}
+                    onMouseMove={(e) => { if (isDraggingHomeHero) moveHomeHeroDrag(e.clientX, e.clientY); }}
+                    onMouseUp={() => setIsDraggingHomeHero(false)}
+                    onMouseLeave={() => setIsDraggingHomeHero(false)}
+                    onTouchStart={(e) => { const t = e.touches[0]; startHomeHeroDrag(t.clientX, t.clientY); }}
+                    onTouchMove={(e) => { const t = e.touches[0]; moveHomeHeroDrag(t.clientX, t.clientY); }}
+                    onTouchEnd={() => setIsDraggingHomeHero(false)}
+                  >
+                    <img
+                      src={homeHeroPreview}
+                      alt="Hero preview"
+                      draggable={false}
+                      className="absolute inset-0 w-full h-full pointer-events-none"
+                      style={{ objectFit: 'cover', objectPosition: `${homeHeroPos.x}% ${homeHeroPos.y}%` }}
+                    />
+                    <div
+                      className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none"
+                      style={{ backgroundColor: `${primaryColor}70` }}
+                    >
+                      <p className="text-white text-xl font-bold drop-shadow">Home Page Hero Preview</p>
+                      <p className="text-white/70 text-sm mt-1">Pride. Tradition. Excellence.</p>
+                    </div>
+                    <div className="absolute bottom-2 right-2 bg-black/50 text-white text-xs px-2 py-1 rounded pointer-events-none">
+                      ⤡ Drag to reposition
+                    </div>
+                  </div>
+                  <p className="text-xs text-gray-400 mt-1">
+                    Crop position: {Math.round(homeHeroPos.x)}% horizontal · {Math.round(homeHeroPos.y)}% vertical
+                  </p>
+                </div>
+              )}
+
+              <button
+                onClick={handleHomeHeroUpload}
+                disabled={homeHeroLoading || !homeHeroFile}
+                className={`w-full py-3 px-6 rounded-lg font-bold text-white transition ${homeHeroLoading || !homeHeroFile ? 'bg-gray-300 cursor-not-allowed' : 'hover:opacity-90'}`}
+                style={!homeHeroLoading && homeHeroFile ? { backgroundColor: primaryColor } : undefined}
+              >
+                {homeHeroLoading ? 'Uploading…' : homeHeroFile ? 'Add to Hero Carousel' : 'Select an image first'}
+              </button>
+
+              {homeHeroMsg && (
+                <div className={`p-4 rounded-lg text-sm ${homeHeroMsg.startsWith('✅') ? 'bg-green-50 border border-green-200 text-green-800' : 'bg-red-50 border border-red-200 text-red-800'}`}>
+                  {homeHeroMsg}
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Championship Hero Images Card */}
+          <div className="bg-white rounded-lg shadow-lg p-8">
+            <h2 className="text-2xl font-bold mb-2 text-gray-800">Championships Page Hero Images</h2>
+            <p className="text-gray-600 mb-6">
+              Upload photos that rotate in the banner at the top of the Championships page. Drag the preview to set the crop position before uploading.
+            </p>
+
+            {/* Existing images */}
+            {champHeroImages.length > 0 && (
+              <div className="mb-6 space-y-3">
+                <p className="text-sm font-semibold text-gray-500 uppercase tracking-wide">
+                  Current Championship Photos ({champHeroImages.length})
+                </p>
+                <div className="grid sm:grid-cols-2 gap-3">
+                  {champHeroImages.map((img) => (
+                    <div key={img.path} className="relative rounded-lg overflow-hidden border border-gray-200 group" style={{ height: '120px' }}>
+                      <img
+                        src={img.path}
+                        alt=""
+                        className="w-full h-full object-cover"
+                        style={{ objectPosition: img.position }}
+                      />
+                      <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                        <button
+                          onClick={() => handleRemoveChampHero(img.path)}
+                          className="bg-red-500 hover:bg-red-600 text-white text-xs font-bold px-3 py-1.5 rounded transition"
+                        >
+                          Remove
+                        </button>
+                      </div>
+                      <div className="absolute bottom-1 left-2 text-white text-xs bg-black/50 px-1.5 py-0.5 rounded pointer-events-none">
+                        {img.position}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Upload new */}
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-semibold mb-2 text-gray-700">Select Image</label>
+                <input
+                  type="file"
+                  accept="image/jpeg,image/jpg,image/png,image/webp"
+                  onChange={handleChampHeroSelect}
+                  disabled={champHeroLoading}
+                  className={`w-full px-4 py-3 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-gray-400 transition ${champHeroLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
+                />
+                <p className="text-xs text-gray-500 mt-1">Best: 1920×600 px or wider · JPG, PNG, or WEBP · max 5 MB</p>
+              </div>
+
+              {/* Drag-to-position preview */}
+              {champHeroPreview && (
+                <div>
+                  <p className="text-sm font-semibold text-gray-600 mb-2">Drag to adjust the crop position:</p>
+                  <div
+                    ref={champHeroPreviewRef}
+                    className="relative overflow-hidden rounded-lg select-none"
+                    style={{ height: '200px', cursor: isDraggingChampHero ? 'grabbing' : 'grab' }}
+                    onMouseDown={(e) => { startChampHeroDrag(e.clientX, e.clientY); e.preventDefault(); }}
+                    onMouseMove={(e) => { if (isDraggingChampHero) moveChampHeroDrag(e.clientX, e.clientY); }}
+                    onMouseUp={() => setIsDraggingChampHero(false)}
+                    onMouseLeave={() => setIsDraggingChampHero(false)}
+                    onTouchStart={(e) => { const t = e.touches[0]; startChampHeroDrag(t.clientX, t.clientY); }}
+                    onTouchMove={(e) => { const t = e.touches[0]; moveChampHeroDrag(t.clientX, t.clientY); }}
+                    onTouchEnd={() => setIsDraggingChampHero(false)}
+                  >
+                    <img
+                      src={champHeroPreview}
+                      alt="Championship hero preview"
+                      draggable={false}
+                      className="absolute inset-0 w-full h-full pointer-events-none"
+                      style={{ objectFit: 'cover', objectPosition: `${champHeroPos.x}% ${champHeroPos.y}%` }}
+                    />
+                    <div
+                      className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none"
+                      style={{ backgroundColor: `${primaryColor}70` }}
+                    >
+                      <p className="text-white text-xl font-bold drop-shadow">Championships Hero Preview</p>
+                      <p className="text-white/70 text-sm mt-1">Team Accomplishments</p>
+                    </div>
+                    <div className="absolute bottom-2 right-2 bg-black/50 text-white text-xs px-2 py-1 rounded pointer-events-none">
+                      ⤡ Drag to reposition
+                    </div>
+                  </div>
+                  <p className="text-xs text-gray-400 mt-1">
+                    Crop position: {Math.round(champHeroPos.x)}% horizontal · {Math.round(champHeroPos.y)}% vertical
+                  </p>
+                </div>
+              )}
+
+              <button
+                onClick={handleChampHeroUpload}
+                disabled={champHeroLoading || !champHeroFile}
+                className={`w-full py-3 px-6 rounded-lg font-bold text-white transition ${champHeroLoading || !champHeroFile ? 'bg-gray-300 cursor-not-allowed' : 'hover:opacity-90'}`}
+                style={!champHeroLoading && champHeroFile ? { backgroundColor: primaryColor } : undefined}
+              >
+                {champHeroLoading ? 'Uploading…' : champHeroFile ? 'Add to Championships Carousel' : 'Select an image first'}
+              </button>
+
+              {champHeroMsg && (
+                <div className={`p-4 rounded-lg text-sm ${champHeroMsg.startsWith('✅') ? 'bg-green-50 border border-green-200 text-green-800' : 'bg-red-50 border border-red-200 text-red-800'}`}>
+                  {champHeroMsg}
+                </div>
+              )}
+            </div>
           </div>
 
         </div>

@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useMemo, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import Script from "next/script";
 import { SiteHeader, XIcon, InstagramIcon, allSports, type Settings } from "./components/SiteHeader";
 
@@ -245,17 +246,26 @@ export default function Home() {
     return games;
   }, [sportsData]);
 
-  // Collect all uploaded sport hero images for the home hero carousel
+  // Collect all hero images for the home carousel: sport images + dedicated home hero images
   const heroImages = useMemo(() => {
     const seen = new Set<string>();
-    const imgs: string[] = [];
+    const imgs: Array<{ src: string; position: string }> = [];
     for (const data of Object.values(sportsData)) {
       const img = (data as any).image;
-      if (img && !seen.has(img)) { seen.add(img); imgs.push(img); }
+      if (img && !seen.has(img)) {
+        seen.add(img);
+        imgs.push({ src: img, position: (data as any).imagePosition || 'center 30%' });
+      }
     }
-    if (imgs.length === 0) imgs.push('/Football.jpg');
+    for (const hero of ((settings as any).heroImages || [])) {
+      if (hero.path && !seen.has(hero.path)) {
+        seen.add(hero.path);
+        imgs.push({ src: hero.path, position: hero.position || 'center 30%' });
+      }
+    }
+    if (imgs.length === 0) imgs.push({ src: '/Football.jpg', position: 'center 30%' });
     return imgs;
-  }, [sportsData]);
+  }, [sportsData, settings]);
 
   const [heroIndex, setHeroIndex] = useState(0);
   useEffect(() => {
@@ -321,23 +331,23 @@ export default function Home() {
       {/* Hero Section */}
       <section
         className="relative text-white overflow-hidden"
-        style={{ minHeight: "500px", paddingTop: "80px", paddingBottom: "80px" }}
+        style={{ height: "90vh", minHeight: "600px" }}
       >
-        {heroImages.map((src, i) => (
-          <img
+        {heroImages.map(({ src, position }, i) => (
+          <Image
             key={src}
             src={src}
             alt=""
+            fill
+            className="object-cover"
             style={{
-              position: "absolute", top: 0, left: 0,
-              width: "100%", height: "100%", objectFit: "cover",
-              objectPosition: (sportsData as any)[
-                Object.keys(sportsData).find(k => (sportsData as any)[k]?.image === src) || ''
-              ]?.imagePosition || "center 30%",
+              objectPosition: position,
               zIndex: 0,
               opacity: i === heroIndex ? 1 : 0,
               transition: "opacity 1.5s ease",
             }}
+            sizes="100vw"
+            priority={i === 0}
           />
         ))}
         <div
@@ -346,33 +356,59 @@ export default function Home() {
             backgroundColor: `${settings.primaryColor}B3`, zIndex: 1,
           }}
         />
-        <div style={{ position: "relative", zIndex: 2 }} className="container mx-auto px-4 text-center">
-          <h1 className="text-5xl font-bold mb-4">
-            Welcome to {settings.schoolName} Athletics
-          </h1>
-          <p className="text-xl mb-8">Pride. Tradition. Excellence.</p>
-          <div className="flex justify-center gap-4">
-            <Link
-              href="/schedule"
-              className="px-8 py-3 rounded-lg font-semibold hover:opacity-90 transition"
-              style={{ backgroundColor: "white", color: settings.primaryColor }}
-            >
-              View Schedule
-            </Link>
+        <div style={{ position: "relative", zIndex: 2, height: "100%" }} className="container mx-auto px-4 text-center flex flex-col py-10">
+          <div>
+            <h1 className="text-5xl font-bold mb-4">
+              Welcome to {settings.schoolName} Athletics
+            </h1>
+            <p className="text-xl mb-4">Pride. Tradition. Excellence.</p>
+          </div>
+          {settings.logo && (
+            <div className="flex-1 flex items-center justify-center py-4 min-h-0">
+              <img
+                src={settings.logo}
+                alt={`${settings.schoolName} logo`}
+                style={{ maxHeight: "100%", maxWidth: "100%", objectFit: "contain", filter: "drop-shadow(0 4px 12px rgba(0,0,0,0.4))" }}
+              />
+            </div>
+          )}
+          <div className="pb-4">
             <Link
               href="/news"
-              className="px-8 py-3 rounded-lg font-semibold transition border-2"
-              style={{
-                backgroundColor: settings.primaryColor,
-                borderColor: settings.secondaryColor,
-                color: "white",
-              }}
+              className="inline-block px-8 py-3 rounded-lg font-bold text-lg border-2 border-white text-white hover:bg-white hover:text-gray-900 transition"
             >
-              Latest News
+              News
             </Link>
           </div>
         </div>
       </section>
+
+      {/* Achievement Stats Section */}
+      {stats.length > 0 && (
+        <section className="py-16 bg-gray-50">
+          <div className="container mx-auto px-4">
+            <div className="flex items-center gap-4 mb-10">
+              <div className="flex-grow h-0.5" style={{ backgroundColor: settings.primaryColor }} />
+              <h2 className="text-3xl font-bold text-gray-800">Our Achievements</h2>
+              <div className="flex-grow h-0.5" style={{ backgroundColor: settings.primaryColor }} />
+            </div>
+            <div ref={statsRef} className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
+              {stats.map((stat, i) => (
+                <StatCardComp
+                  key={stat.id}
+                  title={stat.title}
+                  value={stat.value}
+                  icon={stat.icon}
+                  visible={statsVisible}
+                  delay={i * 160}
+                  primaryColor={settings.primaryColor}
+                  secondaryColor={settings.secondaryColor}
+                />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* News Section */}
       <section className="py-12 bg-gray-100">
@@ -515,33 +551,6 @@ export default function Home() {
             const w = window as { twttr?: { widgets: { load: () => void } } };
             w.twttr?.widgets.load();
           }} />
-      )}
-
-      {/* Achievement Stats Section */}
-      {stats.length > 0 && (
-        <section className="py-16 bg-gray-50">
-          <div className="container mx-auto px-4">
-            <div className="flex items-center gap-4 mb-10">
-              <div className="flex-grow h-0.5" style={{ backgroundColor: settings.primaryColor }} />
-              <h2 className="text-3xl font-bold text-gray-800">Our Achievements</h2>
-              <div className="flex-grow h-0.5" style={{ backgroundColor: settings.primaryColor }} />
-            </div>
-            <div ref={statsRef} className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
-              {stats.map((stat, i) => (
-                <StatCardComp
-                  key={stat.id}
-                  title={stat.title}
-                  value={stat.value}
-                  icon={stat.icon}
-                  visible={statsVisible}
-                  delay={i * 160}
-                  primaryColor={settings.primaryColor}
-                  secondaryColor={settings.secondaryColor}
-                />
-              ))}
-            </div>
-          </div>
-        </section>
       )}
 
       {/* Upcoming Games */}

@@ -700,7 +700,12 @@
     "image": "/boys-soccer-hero.jpeg",
     "coach": "Bryan Fossi",
     "coachEmail": "bfossi@lchsyes.org",
-    "description": "Lancaster Catholic Boys Soccer is a proud, tradition-rich program dedicated to developing student-athletes who compete with skill, discipline, and heart. Rooted in the values of Lancaster Catholic High School, the program emphasizes teamwork, leadership, and respect—on and off the field. Through a commitment to hard work, sportsmanship, and continuous improvement, Lancaster Catholic Soccer prepares players not only for competitive success, but also for growth as confident leaders and teammates who represent their school and community with pride."
+    "description": "Lancaster Catholic Boys Soccer is a proud, tradition-rich program dedicated to developing student-athletes who compete with skill, discipline, and heart. Rooted in the values of Lancaster Catholic High School, the program emphasizes teamwork, leadership, and respect—on and off the field. Through a commitment to hard work, sportsmanship, and continuous improvement, Lancaster Catholic Soccer prepares players not only for competitive success, but also for growth as confident leaders and teammates who represent their school and community with pride.",
+    "coachPhoto": "/coaches/boys-soccer.jpg",
+    "twitterUrl": "",
+    "instagramUrl": "",
+    "coachPhotoPosition": "63% 61%",
+    "imagePosition": "51% 18%"
   },
   "cross-country": {
     "schedule": [

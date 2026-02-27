@@ -182,18 +182,18 @@ export function SiteHeader({ settings, sportsData = {} }: Props) {
             </li>
 
             <li>
-              <Link href="/schedule" className="hover:opacity-80 transition">
-                Schedule
-              </Link>
-            </li>
-            <li>
               <Link href="/news" className="hover:opacity-80 transition">
                 News
               </Link>
             </li>
             <li>
-              <Link href="/contact" className="hover:opacity-80 transition">
-                Contact
+              <Link href="/about" className="hover:opacity-80 transition">
+                About Us
+              </Link>
+            </li>
+            <li>
+              <Link href="/championships" className="hover:opacity-80 transition">
+                Championships
               </Link>
             </li>
           </ul>

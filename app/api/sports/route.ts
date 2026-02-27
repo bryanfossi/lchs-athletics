@@ -29,16 +29,13 @@ export async function POST(request: NextRequest) {
     
     // Handle different update types
     if (type === 'info') {
-      // Update coach, coachEmail, and description
-      if (data.coach !== undefined) {
-        allSportsData[sport].coach = data.coach;
-      }
-      if (data.coachEmail !== undefined) {
-        allSportsData[sport].coachEmail = data.coachEmail;
-      }
-      if (data.description !== undefined) {
-        allSportsData[sport].description = data.description;
-      }
+      if (data.coach !== undefined) allSportsData[sport].coach = data.coach;
+      if (data.coachEmail !== undefined) allSportsData[sport].coachEmail = data.coachEmail;
+      if (data.coachPhoto !== undefined) allSportsData[sport].coachPhoto = data.coachPhoto;
+      if (data.coachPhotoPosition !== undefined) allSportsData[sport].coachPhotoPosition = data.coachPhotoPosition;
+      if (data.description !== undefined) allSportsData[sport].description = data.description;
+      if (data.twitterUrl !== undefined) allSportsData[sport].twitterUrl = data.twitterUrl;
+      if (data.instagramUrl !== undefined) allSportsData[sport].instagramUrl = data.instagramUrl;
     } else {
       // Update schedule or roster
       allSportsData[sport][type] = data;

@@ -137,6 +137,8 @@ export default function SportPage() {
   const [description, setDescription] = useState("");
   const [twitterUrl, setTwitterUrl] = useState("");
   const [instagramUrl, setInstagramUrl] = useState("");
+  const [coachPhoto, setCoachPhoto] = useState("");
+  const [coachPhotoPosition, setCoachPhotoPosition] = useState("center");
   const [sportImagePosition, setSportImagePosition] = useState("center 20%");
   const [loading, setLoading] = useState(true);
   const [settings, setSettings] = useState<Settings>(DEFAULT_SETTINGS);
@@ -178,6 +180,8 @@ export default function SportPage() {
             setTwitterUrl(data.twitterUrl || "");
             setInstagramUrl(data.instagramUrl || "");
             setSportImagePosition(data.imagePosition || "center 20%");
+            setCoachPhoto(data.coachPhoto || "");
+            setCoachPhotoPosition(data.coachPhotoPosition || "center");
           }
         }
       } catch (error) {
@@ -276,7 +280,6 @@ export default function SportPage() {
   }
 
   const heroImage = sportImage || sport.image;
-  const displayCoach = coachName || "";
   const displayDescription =
     description ||
     `The ${sport.name} program competes with pride and dedication throughout the ${sport.season} season.`;
@@ -307,15 +310,7 @@ export default function SportPage() {
         />
         <div style={{ position: "relative", zIndex: 2 }} className="container mx-auto px-4">
           <h1 className="text-5xl font-bold mb-2">{sport.name}</h1>
-          <p className="text-xl mb-1">{sport.season} Sport</p>
-          {displayCoach && <p className="text-lg mb-1">{displayCoach}</p>}
-          {coachEmail && (
-            <p className="text-md mb-2">
-              <a href={`mailto:${coachEmail}`} className="hover:opacity-80 transition">
-                {coachEmail}
-              </a>
-            </p>
-          )}
+          <p className="text-xl mb-4">{sport.season} Sport</p>
           {(twitterUrl || instagramUrl) && (
             <div className="flex gap-3 mt-3">
               {twitterUrl && (
@@ -344,6 +339,51 @@ export default function SportPage() {
           )}
         </div>
       </section>
+
+      {/* Coaching Staff */}
+      {(coachName || coachEmail || coachPhoto) && (
+        <section className="py-10 bg-white border-b border-gray-100">
+          <div className="container mx-auto px-4">
+            <h2 className="text-2xl font-bold mb-5 text-gray-800">Coaching Staff</h2>
+            <div className="flex items-center gap-5">
+              {coachPhoto ? (
+                <div
+                  className="shrink-0 rounded-full overflow-hidden border-4"
+                  style={{ width: '96px', height: '96px', borderColor: settings.primaryColor }}
+                >
+                  <img
+                    src={coachPhoto}
+                    alt={coachName || "Coach"}
+                    className="w-full h-full object-cover"
+                    style={{ objectPosition: coachPhotoPosition }}
+                  />
+                </div>
+              ) : (
+                <div
+                  className="shrink-0 rounded-full flex items-center justify-center border-4"
+                  style={{ width: '96px', height: '96px', borderColor: settings.primaryColor, backgroundColor: `${settings.primaryColor}15` }}
+                >
+                  <svg className="w-10 h-10 text-gray-400" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z" />
+                  </svg>
+                </div>
+              )}
+              <div>
+                {coachName && <p className="text-xl font-bold text-gray-800">{coachName}</p>}
+                {coachEmail && (
+                  <a
+                    href={`mailto:${coachEmail}`}
+                    className="text-sm hover:opacity-80 transition"
+                    style={{ color: settings.primaryColor }}
+                  >
+                    {coachEmail}
+                  </a>
+                )}
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* About Section */}
       <section className="py-12 bg-white">

@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { writeFile, mkdir } from 'fs/promises';
 import { existsSync } from 'fs';
 import path from 'path';
+import sharp from 'sharp';
 
 export async function POST(request: NextRequest) {
   try {
@@ -33,17 +34,18 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Convert file to buffer
+    // Convert file to buffer and resize
     const bytes = await file.arrayBuffer();
-    const buffer = Buffer.from(bytes);
+    const processedBuffer = await sharp(Buffer.from(bytes))
+      .resize(1920, null, { withoutEnlargement: true })
+      .jpeg({ quality: 85 })
+      .toBuffer();
 
-    // Determine file extension
-    const ext = file.type.split('/')[1];
-    const filename = `${sport}-hero.${ext}`;
-    
+    const filename = `${sport}-hero.jpg`;
+
     // Save to public directory
     const publicPath = path.join(process.cwd(), 'public', filename);
-    await writeFile(publicPath, buffer);
+    await writeFile(publicPath, processedBuffer);
 
     // Update sports data to reference new image
     const dataFilePath = path.join(process.cwd(), 'data', 'sportsData.json');

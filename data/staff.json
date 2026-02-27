@@ -1,0 +1,26 @@
+[
+  {
+    "id": "ad",
+    "role": "Athletic Director",
+    "name": "Nate Leonard",
+    "email": "nleonard@lchsyes.org",
+    "photo": "/staff/ad.jpg",
+    "photoPosition": "52% 64%"
+  },
+  {
+    "id": "aad",
+    "role": "Assistant Athletic Director",
+    "name": "Beth Newill",
+    "email": "bnewill@lchsyes.org",
+    "photo": "/staff/aad.jpg",
+    "photoPosition": "51% 45%"
+  },
+  {
+    "id": "atad",
+    "role": "Assistant to the Athletic Director",
+    "name": "Diana Anater",
+    "email": "danater@lchsyes.org",
+    "photo": "",
+    "photoPosition": "50% 50%"
+  }
+]
