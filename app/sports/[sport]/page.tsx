@@ -143,6 +143,7 @@ export default function SportPage() {
   const [loading, setLoading] = useState(true);
   const [settings, setSettings] = useState<Settings>(DEFAULT_SETTINGS);
   const [sportsData, setSportsData] = useState<Record<string, any>>({});
+  const [achievements, setAchievements] = useState<{ id: string; title: string; years: string }[]>([]);
 
   // Filter state — season starts at the current calendar season so the dropdown
   // always has a valid selection immediately; auto-selection refines it once data loads.
@@ -154,14 +155,21 @@ export default function SportPage() {
   useEffect(() => {
     const fetchAll = async () => {
       try {
-        const [sportsRes, settingsRes] = await Promise.all([
+        const [sportsRes, settingsRes, champsRes] = await Promise.all([
           fetch('/api/sports'),
           fetch('/api/settings'),
+          fetch('/api/championships'),
         ]);
-        const [sportsResult, settingsResult] = await Promise.all([
+        const [sportsResult, settingsResult, champsResult] = await Promise.all([
           sportsRes.json(),
           settingsRes.json(),
+          champsRes.json(),
         ]);
+
+        if (champsResult.success && champsResult.data?.sports) {
+          const sportChamps = champsResult.data.sports.find((s: any) => s.slug === sportSlug);
+          setAchievements(sportChamps?.achievements || []);
+        }
 
         if (settingsResult.success && settingsResult.data) {
           setSettings({ ...DEFAULT_SETTINGS, ...settingsResult.data });
@@ -291,7 +299,7 @@ export default function SportPage() {
       {/* Sport Hero */}
       <section
         className="relative text-white overflow-hidden"
-        style={{ minHeight: "400px", paddingTop: "60px", paddingBottom: "60px" }}
+        style={{ minHeight: "420px" }}
       >
         <img
           src={heroImage}
@@ -305,36 +313,66 @@ export default function SportPage() {
         <div
           style={{
             position: "absolute", top: 0, left: 0, right: 0, bottom: 0,
-            backgroundColor: `${settings.primaryColor}99`, zIndex: 1,
+            backgroundColor: "rgba(0,0,0,0.45)", zIndex: 1,
           }}
         />
-        <div style={{ position: "relative", zIndex: 2 }} className="container mx-auto px-4">
-          <h1 className="text-5xl font-bold mb-2">{sport.name}</h1>
-          <p className="text-xl mb-4">{sport.season} Sport</p>
-          {(twitterUrl || instagramUrl) && (
-            <div className="flex gap-3 mt-3">
-              {twitterUrl && (
-                <a
-                  href={twitterUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="bg-white/20 hover:bg-white/30 p-2 rounded-full transition"
-                  title="Follow on X"
-                >
-                  <XIcon className="w-5 h-5" />
-                </a>
-              )}
-              {instagramUrl && (
-                <a
-                  href={instagramUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="bg-white/20 hover:bg-white/30 p-2 rounded-full transition"
-                  title="Follow on Instagram"
-                >
-                  <InstagramIcon className="w-5 h-5" />
-                </a>
-              )}
+        {/* Hero content — sport card top-left, championships center-right */}
+        <div
+          style={{ position: "relative", zIndex: 2 }}
+          className="container mx-auto px-4 pt-10 pb-16 flex justify-between items-center gap-6 flex-wrap"
+        >
+          {/* Sport card — top left */}
+          <div
+            className="self-start inline-block rounded-2xl px-8 py-6 shadow-2xl"
+            style={{
+              backgroundColor: `${settings.primaryColor}CC`,
+              border: `2px solid ${settings.secondaryColor}`,
+              backdropFilter: "blur(6px)",
+            }}
+          >
+            <span
+              className="inline-block px-4 py-1 rounded-full text-sm font-bold mb-4"
+              style={{ backgroundColor: settings.secondaryColor, color: settings.primaryColor }}
+            >
+              {sport.season} Season
+            </span>
+            <h1 className="text-4xl font-bold drop-shadow">{sport.name}</h1>
+          </div>
+
+          {/* Championships card — center right */}
+          {achievements.length > 0 && (
+            <div
+              className="rounded-2xl px-7 py-5 shadow-2xl max-w-xs w-full"
+              style={{
+                backgroundColor: `${settings.primaryColor}CC`,
+                border: `2px solid ${settings.secondaryColor}`,
+                backdropFilter: "blur(6px)",
+              }}
+            >
+              <span
+                className="inline-block px-4 py-1 rounded-full text-sm font-bold mb-4"
+                style={{ backgroundColor: settings.secondaryColor, color: settings.primaryColor }}
+              >
+                Championships &amp; Titles
+              </span>
+              <div className="space-y-3">
+                {achievements.map((a) => (
+                  <div key={a.id}>
+                    <p className="text-white/80 text-xs font-semibold mb-1">{a.title}</p>
+                    <div className="flex flex-wrap gap-1">
+                      {a.years.split(',').map((y) => (
+                        <span
+                          key={y.trim()}
+                          className="inline-block px-2 py-0.5 rounded-full text-xs font-semibold text-white"
+                          style={{ backgroundColor: "rgba(255,255,255,0.2)" }}
+                        >
+                          {y.trim()}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           )}
         </div>
