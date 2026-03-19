@@ -135,9 +135,9 @@ export default function AboutPage() {
             <div className="grid gap-6 md:grid-cols-3 max-w-6xl mx-auto">
               {visibleStaff.map((member) => (
                 <article key={member.id} className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100">
-                  <div className="relative h-56 bg-gray-200">
+                  <div className="relative aspect-[3/4] bg-gray-200">
                     {member.photo ? (
-                      <Image src={member.photo} alt={member.name || member.role} fill className="object-cover" style={{ objectPosition: member.photoPosition || 'center' }} sizes="(max-width: 768px) 100vw, 33vw" />
+                      <Image src={member.photo} alt={member.name || member.role} fill className="object-cover" style={{ objectPosition: member.photoPosition || 'top center' }} sizes="(max-width: 768px) 100vw, 33vw" />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center text-gray-400">No Photo</div>
                     )}
@@ -189,9 +189,9 @@ export default function AboutPage() {
                     const d = sportsData[s.value] || {};
                     return (
                       <article key={s.value} className="bg-gray-50 rounded-xl shadow border border-gray-100 overflow-hidden">
-                        <div className="relative h-44 bg-gray-200">
+                        <div className="relative aspect-[3/4] bg-gray-200">
                           {d.coachPhoto ? (
-                            <Image src={d.coachPhoto} alt={d.coach || s.label} fill className="object-cover" style={{ objectPosition: d.coachPhotoPosition || 'center' }} sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw" />
+                            <Image src={d.coachPhoto} alt={d.coach || s.label} fill className="object-cover" style={{ objectPosition: d.coachPhotoPosition || 'top center' }} sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw" />
                           ) : (
                             <div className="w-full h-full flex items-center justify-center text-gray-400 text-sm">No Photo</div>
                           )}

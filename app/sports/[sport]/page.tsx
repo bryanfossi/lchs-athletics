@@ -138,7 +138,7 @@ export default function SportPage() {
   const [twitterUrl, setTwitterUrl] = useState("");
   const [instagramUrl, setInstagramUrl] = useState("");
   const [coachPhoto, setCoachPhoto] = useState("");
-  const [coachPhotoPosition, setCoachPhotoPosition] = useState("center");
+  const [coachPhotoPosition, setCoachPhotoPosition] = useState("top center");
   const [sportImagePosition, setSportImagePosition] = useState("center 20%");
   const [loading, setLoading] = useState(true);
   const [settings, setSettings] = useState<Settings>(DEFAULT_SETTINGS);
@@ -181,7 +181,7 @@ export default function SportPage() {
             setInstagramUrl(data.instagramUrl || "");
             setSportImagePosition(data.imagePosition || "center 20%");
             setCoachPhoto(data.coachPhoto || "");
-            setCoachPhotoPosition(data.coachPhotoPosition || "center");
+            setCoachPhotoPosition(data.coachPhotoPosition || "top center");
           }
         }
       } catch (error) {

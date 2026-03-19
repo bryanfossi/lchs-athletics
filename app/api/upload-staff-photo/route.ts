@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { writeFile, mkdir } from 'fs/promises';
 import path from 'path';
 import sharp from 'sharp';
+import { validateImageFile } from '@/lib/validate-image';
 
 export async function POST(request: NextRequest) {
   try {
@@ -9,25 +10,17 @@ export async function POST(request: NextRequest) {
     const file = formData.get('file') as File;
     const staffId = formData.get('staffId') as string;
 
-    if (!file) {
-      return NextResponse.json({ success: false, message: 'No file provided' }, { status: 400 });
-    }
+    if (!file) return NextResponse.json({ success: false, message: 'No file provided' }, { status: 400 });
 
-    const validTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
-    if (!validTypes.includes(file.type)) {
-      return NextResponse.json({ success: false, message: 'Invalid file type. Please upload JPG, PNG, or WEBP.' }, { status: 400 });
-    }
-
-    if (file.size > 5 * 1024 * 1024) {
-      return NextResponse.json({ success: false, message: 'File too large. Maximum size is 5MB.' }, { status: 400 });
-    }
+    const error = validateImageFile(file);
+    if (error) return NextResponse.json({ success: false, message: error }, { status: 400 });
 
     const filename = `${staffId || 'staff'}.jpg`;
     const dir = path.join(process.cwd(), 'public', 'staff');
     await mkdir(dir, { recursive: true });
     const processedBuffer = await sharp(Buffer.from(await file.arrayBuffer()))
-      .resize(800, 800, { fit: 'inside', withoutEnlargement: true })
-      .jpeg({ quality: 85 })
+      .resize(800, 1067, { fit: 'inside', withoutEnlargement: true })
+      .jpeg({ quality: 92 })
       .toBuffer();
     await writeFile(path.join(dir, filename), processedBuffer);
 

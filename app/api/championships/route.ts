@@ -1,15 +1,23 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { readFile, writeFile } from 'fs/promises';
 import path from 'path';
+import { readJson, writeJson } from '@/lib/json-store';
 
 const FILE = path.join(process.cwd(), 'data', 'championships.json');
 
+interface ChampionshipSport {
+  slug: string;
+  label: string;
+  achievements: { id: string; title: string; years: string }[];
+}
+interface ChampionshipData {
+  sports: ChampionshipSport[];
+  individual: { league: string[]; district: string[]; state: string[] };
+  heroImages?: { path: string; position: string }[];
+}
+const DEFAULT_DATA: ChampionshipData = { sports: [], individual: { league: [], district: [], state: [] } };
+
 async function readData() {
-  try {
-    return JSON.parse(await readFile(FILE, 'utf-8'));
-  } catch {
-    return { sports: [], individual: { league: [], district: [], state: [] } };
-  }
+  return readJson(FILE, DEFAULT_DATA);
 }
 
 export async function GET() {
@@ -22,7 +30,7 @@ export async function POST(request: NextRequest) {
     const data = await readData();
 
     if (body.action === 'sport') {
-      const idx = data.sports.findIndex((s: { slug: string }) => s.slug === body.slug);
+      const idx = data.sports.findIndex((s) => s.slug === body.slug);
       if (idx >= 0) {
         data.sports[idx].achievements = body.achievements;
       } else {
@@ -34,7 +42,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ success: false, message: 'Unknown action' }, { status: 400 });
     }
 
-    await writeFile(FILE, JSON.stringify(data, null, 2), 'utf-8');
+    await writeJson(FILE, data);
     return NextResponse.json({ success: true });
   } catch {
     return NextResponse.json({ success: false, message: 'Error saving championships data' }, { status: 500 });

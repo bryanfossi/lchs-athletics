@@ -5,6 +5,32 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { allSports } from "../components/SiteHeader";
 
+// ── Shared drag-to-position helpers ──────────────────────────────────────────
+function makeDragHandlers(
+  setDragging: (v: boolean) => void,
+  setPos: React.Dispatch<React.SetStateAction<{ x: number; y: number }>>,
+  previewRef: React.RefObject<HTMLDivElement | null>,
+  lastRef: React.MutableRefObject<{ x: number; y: number }>,
+) {
+  return {
+    start(clientX: number, clientY: number) {
+      setDragging(true);
+      lastRef.current = { x: clientX, y: clientY };
+    },
+    move(clientX: number, clientY: number) {
+      if (!previewRef.current) return;
+      const rect = previewRef.current.getBoundingClientRect();
+      const dx = clientX - lastRef.current.x;
+      const dy = clientY - lastRef.current.y;
+      lastRef.current = { x: clientX, y: clientY };
+      setPos(prev => ({
+        x: Math.max(0, Math.min(100, prev.x - (dx / rect.width) * 100)),
+        y: Math.max(0, Math.min(100, prev.y - (dy / rect.height) * 100)),
+      }));
+    },
+  };
+}
+
 export default function SystemAdminPage() {
   const router = useRouter();
   const [schoolName, setSchoolName] = useState("");
@@ -245,32 +271,18 @@ export default function SystemAdminPage() {
     }
   };
 
-  // ── Home hero image handlers ───────────────────────────────────────────────
+  // ── Hero carousel drag handlers (shared factory) ──────────────────────────
+
+  const homeHeroDrag = makeDragHandlers(setIsDraggingHomeHero, setHomeHeroPos, homeHeroPreviewRef, homeHeroDragLast);
+  const champHeroDrag = makeDragHandlers(setIsDraggingChampHero, setChampHeroPos, champHeroPreviewRef, champHeroDragLast);
 
   const handleHomeHeroSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
     setHomeHeroFile(file);
-    setHomeHeroPreview(URL.createObjectURL(file));
+    setHomeHeroPreview((prev) => { if (prev) URL.revokeObjectURL(prev); return URL.createObjectURL(file); });
     setHomeHeroPos({ x: 50, y: 30 });
     setHomeHeroMsg("");
-  };
-
-  const startHomeHeroDrag = (clientX: number, clientY: number) => {
-    setIsDraggingHomeHero(true);
-    homeHeroDragLast.current = { x: clientX, y: clientY };
-  };
-
-  const moveHomeHeroDrag = (clientX: number, clientY: number) => {
-    if (!homeHeroPreviewRef.current) return;
-    const rect = homeHeroPreviewRef.current.getBoundingClientRect();
-    const dx = clientX - homeHeroDragLast.current.x;
-    const dy = clientY - homeHeroDragLast.current.y;
-    homeHeroDragLast.current = { x: clientX, y: clientY };
-    setHomeHeroPos(prev => ({
-      x: Math.max(0, Math.min(100, prev.x - (dx / rect.width) * 100)),
-      y: Math.max(0, Math.min(100, prev.y - (dy / rect.height) * 100)),
-    }));
   };
 
   const handleHomeHeroUpload = async () => {
@@ -301,46 +313,19 @@ export default function SystemAdminPage() {
 
   const handleRemoveHomeHero = async (imagePath: string) => {
     try {
-      const res = await fetch('/api/home-hero', {
-        method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ imagePath }),
-      });
+      const res = await fetch('/api/home-hero', { method: 'DELETE', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ imagePath }) });
       const result = await res.json();
-      if (result.success) {
-        setHeroImages(result.heroImages);
-      }
-    } catch {
-      // silently fail
-    }
+      if (result.success) setHeroImages(result.heroImages);
+    } catch { /* silently fail */ }
   };
-
-  // ── Championship hero image handlers ──────────────────────────────────────
 
   const handleChampHeroSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
     setChampHeroFile(file);
-    setChampHeroPreview(URL.createObjectURL(file));
+    setChampHeroPreview((prev) => { if (prev) URL.revokeObjectURL(prev); return URL.createObjectURL(file); });
     setChampHeroPos({ x: 50, y: 30 });
     setChampHeroMsg("");
-  };
-
-  const startChampHeroDrag = (clientX: number, clientY: number) => {
-    setIsDraggingChampHero(true);
-    champHeroDragLast.current = { x: clientX, y: clientY };
-  };
-
-  const moveChampHeroDrag = (clientX: number, clientY: number) => {
-    if (!champHeroPreviewRef.current) return;
-    const rect = champHeroPreviewRef.current.getBoundingClientRect();
-    const dx = clientX - champHeroDragLast.current.x;
-    const dy = clientY - champHeroDragLast.current.y;
-    champHeroDragLast.current = { x: clientX, y: clientY };
-    setChampHeroPos(prev => ({
-      x: Math.max(0, Math.min(100, prev.x - (dx / rect.width) * 100)),
-      y: Math.max(0, Math.min(100, prev.y - (dy / rect.height) * 100)),
-    }));
   };
 
   const handleChampHeroUpload = async () => {
@@ -371,18 +356,10 @@ export default function SystemAdminPage() {
 
   const handleRemoveChampHero = async (imagePath: string) => {
     try {
-      const res = await fetch('/api/championship-hero', {
-        method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ imagePath }),
-      });
+      const res = await fetch('/api/championship-hero', { method: 'DELETE', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ imagePath }) });
       const result = await res.json();
-      if (result.success) {
-        setChampHeroImages(result.heroImages);
-      }
-    } catch {
-      // silently fail
-    }
+      if (result.success) setChampHeroImages(result.heroImages);
+    } catch { /* silently fail */ }
   };
 
   // ─────────────────────────────────────────────────────────────────────────
@@ -1121,12 +1098,12 @@ export default function SystemAdminPage() {
                     ref={homeHeroPreviewRef}
                     className="relative overflow-hidden rounded-lg select-none"
                     style={{ height: '200px', cursor: isDraggingHomeHero ? 'grabbing' : 'grab' }}
-                    onMouseDown={(e) => { startHomeHeroDrag(e.clientX, e.clientY); e.preventDefault(); }}
-                    onMouseMove={(e) => { if (isDraggingHomeHero) moveHomeHeroDrag(e.clientX, e.clientY); }}
+                    onMouseDown={(e) => { homeHeroDrag.start(e.clientX, e.clientY); e.preventDefault(); }}
+                    onMouseMove={(e) => { if (isDraggingHomeHero) homeHeroDrag.move(e.clientX, e.clientY); }}
                     onMouseUp={() => setIsDraggingHomeHero(false)}
                     onMouseLeave={() => setIsDraggingHomeHero(false)}
-                    onTouchStart={(e) => { const t = e.touches[0]; startHomeHeroDrag(t.clientX, t.clientY); }}
-                    onTouchMove={(e) => { const t = e.touches[0]; moveHomeHeroDrag(t.clientX, t.clientY); }}
+                    onTouchStart={(e) => { const t = e.touches[0]; homeHeroDrag.start(t.clientX, t.clientY); }}
+                    onTouchMove={(e) => { const t = e.touches[0]; homeHeroDrag.move(t.clientX, t.clientY); }}
                     onTouchEnd={() => setIsDraggingHomeHero(false)}
                   >
                     <img
@@ -1231,12 +1208,12 @@ export default function SystemAdminPage() {
                     ref={champHeroPreviewRef}
                     className="relative overflow-hidden rounded-lg select-none"
                     style={{ height: '200px', cursor: isDraggingChampHero ? 'grabbing' : 'grab' }}
-                    onMouseDown={(e) => { startChampHeroDrag(e.clientX, e.clientY); e.preventDefault(); }}
-                    onMouseMove={(e) => { if (isDraggingChampHero) moveChampHeroDrag(e.clientX, e.clientY); }}
+                    onMouseDown={(e) => { champHeroDrag.start(e.clientX, e.clientY); e.preventDefault(); }}
+                    onMouseMove={(e) => { if (isDraggingChampHero) champHeroDrag.move(e.clientX, e.clientY); }}
                     onMouseUp={() => setIsDraggingChampHero(false)}
                     onMouseLeave={() => setIsDraggingChampHero(false)}
-                    onTouchStart={(e) => { const t = e.touches[0]; startChampHeroDrag(t.clientX, t.clientY); }}
-                    onTouchMove={(e) => { const t = e.touches[0]; moveChampHeroDrag(t.clientX, t.clientY); }}
+                    onTouchStart={(e) => { const t = e.touches[0]; champHeroDrag.start(t.clientX, t.clientY); }}
+                    onTouchMove={(e) => { const t = e.touches[0]; champHeroDrag.move(t.clientX, t.clientY); }}
                     onTouchEnd={() => setIsDraggingChampHero(false)}
                   >
                     <img

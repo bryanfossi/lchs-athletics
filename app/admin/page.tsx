@@ -226,24 +226,15 @@ export default function AdminPage() {
   }, [uploadType]);
 
   useEffect(() => {
-    if (uploadType !== "championships") return;
+    if (uploadType !== "championships" && uploadType !== "individual-awards") return;
     fetch('/api/championships')
       .then((r) => r.json())
       .then((result) => {
-        if (result.success) {
+        if (!result.success) return;
+        if (uploadType === "championships") {
           const sport = result.data?.sports?.find((s: { slug: string }) => s.slug === selectedSport);
           setSportAchievements(sport?.achievements || []);
-        }
-      })
-      .catch(() => {});
-  }, [selectedSport, uploadType]);
-
-  useEffect(() => {
-    if (uploadType !== "individual-awards") return;
-    fetch('/api/championships')
-      .then((r) => r.json())
-      .then((result) => {
-        if (result.success) {
+        } else {
           const ind = result.data?.individual || {};
           setLeagueEntries((ind.league || []).join('\n'));
           setDistrictEntries((ind.district || []).join('\n'));
@@ -251,7 +242,7 @@ export default function AdminPage() {
         }
       })
       .catch(() => {});
-  }, [uploadType]);
+  }, [selectedSport, uploadType]);
 
   const handleLogout = async () => {
     if (sessionRole === 'pageowner') {
@@ -446,7 +437,7 @@ export default function AdminPage() {
     const file = e.target.files?.[0];
     if (!file) return;
     setHeroImageFile(file);
-    setHeroImagePreview(URL.createObjectURL(file));
+    setHeroImagePreview((prev) => { if (prev) URL.revokeObjectURL(prev); return URL.createObjectURL(file); });
     setHeroImgPos({ x: 50, y: 30 });
   };
 
@@ -608,10 +599,9 @@ export default function AdminPage() {
 
   const handleNewsImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (file) {
-      setNewsImageFile(file);
-      setNewsImagePreview(URL.createObjectURL(file));
-    }
+    if (!file) return;
+    setNewsImageFile(file);
+    setNewsImagePreview((prev) => { if (prev) URL.revokeObjectURL(prev); return URL.createObjectURL(file); });
   };
 
   const handleNewsSubmit = async () => {
